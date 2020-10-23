@@ -17,7 +17,7 @@ export default class AppNavbar extends Component {
 
   render() {
 
-    return <Navbar color="dark" dark expand="md">
+    return <Navbar color="dark" dark expand="md" sticky="top">
       <NavbarBrand tag={Link} to="/"><a href="#" class="pull-left"><img src={process.env.PUBLIC_URL + '/cinq-logo.png'} height="50" width="50"></img></a> </NavbarBrand>
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
@@ -46,11 +46,11 @@ export default class AppNavbar extends Component {
           <NavItem>
             <UncontrolledDropdown setActiveFromChild>
               <DropdownToggle tag="a" className="nav-link" caret>
-                <img src={process.env.PUBLIC_URL + '/person-circle.svg'} height="50" width="50"></img>
+                <img src={process.env.PUBLIC_URL + '/person-circle.svg'} height="30" width="30"></img>
                 </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem tag="a" href="/blah" active>Manage Account</DropdownItem>
-                <DropdownItem tag="a" href="/blah" active>Log out</DropdownItem>
+              <DropdownMenu right>
+                <DropdownItem tag="a" href="/blah">Manage Account</DropdownItem>
+                <DropdownItem tag="a" href="/blah">Log out</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </NavItem>
