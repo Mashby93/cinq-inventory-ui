@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Container, Table, Form, FormGroup } from 'reactstr
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
+import LoadingScreen from './components/LoadingScreen';
 
 class ProductList extends Component {
   link = 'api/products/bulk?statusCodes=IN_COSMETIC';
@@ -87,7 +88,7 @@ class ProductList extends Component {
     const {products, isLoading} = this.state;
 
     if (isLoading) {
-      return <p>Loading...</p>;
+      return <LoadingScreen/>;
     }
 
     const data =
