@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Spinner } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
+import LoadingScreen from './components/LoadingScreen'
 
 class RepairProductList extends Component {
   link = 'api/products/bulk?statusCodes=READY_FOR_REPAIR&statusCodes=IN_REPAIR';
@@ -53,7 +54,7 @@ class RepairProductList extends Component {
     const {products, isLoading} = this.state;
 
     if (isLoading) {
-      return <p>Loading...</p>;
+      return <LoadingScreen/>;
     }
 
     const serviceName = window.location.pathname.split("/")[1];
