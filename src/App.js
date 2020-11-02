@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ProductList from './ProductList';
-import ProductReceivables from './ProductReceivables';
-import ReceiveProduct from './ReceiveProduct';
-import ProductEdit from './ProductEdit';
-import ModelEdit from './ModelEdit';
+import ProductList from './models/ProductList';
+import ProductReceivables from './routes/listings/ProductReceivables';
+import ReceiveProduct from './routes/ReceiveProduct';
+import ProductEdit from './models/ProductEdit';
+import ModelEdit from './models/ModelEdit';
 import Login from './Login';
-import CosmeticReceivable from './CosmeticReceivable.js';
-import RepairProductList from './RepairProductList.js';
-import RepairProduct from './RepairProduct.js'
-import QAList from './QAList.js';
-import QaProduct from './QaProduct.js';
-import PackOutList from './PackOutList.js';
+import CosmeticReceivable from './routes/listings/CosmeticReceivable.js';
+import RepairProductList from './routes/listings/RepairProductList.js';
+import RepairProduct from './routes/RepairProduct.js'
+import QAList from './routes/listings/QAList.js';
+import QaProduct from './routes/QaProduct.js';
+import PackOutList from './routes/listings/PackOutList.js';
 import Reports from './Reports.js';
 
 class App extends Component {
