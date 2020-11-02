@@ -13,6 +13,7 @@ import RepairProduct from './routes/RepairProduct.js'
 import QAList from './routes/listings/QAList.js';
 import QaProduct from './routes/QaProduct.js';
 import PackOutList from './routes/listings/PackOutList.js';
+import PackOut from './routes/PackOut.js';
 import Reports from './Reports.js';
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route path='/qa' exact={true} component={QAList}/>
           <Route path='/qa/:id/details' exact={true} component={QaProduct}/>
           <Route path='/pack-out' exact={true} component={PackOutList}/>
+          <Route path='/pack-out/:id/details' exact={true} component={PackOut}/>
           <Route path='/reports' exact={true} component={Reports}/>
           <Route path='/models/new' exact={true} component={ModelEdit}/>
         </Switch>
