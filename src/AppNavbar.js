@@ -50,7 +50,14 @@ export default class AppNavbar extends Component {
             <NavLink href="/pack-out">Pack Out</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/management-dashboard">Management Dashboard</NavLink>
+          <UncontrolledDropdown setActiveFromChild>
+            <DropdownToggle tag="a" className="nav-link" caret>
+              Management
+              </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem tag="a" href="/management/users">Manage Users</DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>

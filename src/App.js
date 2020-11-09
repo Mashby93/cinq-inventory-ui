@@ -16,6 +16,8 @@ import QaProduct from './routes/QaProduct.js';
 import PackOutList from './routes/listings/PackOutList.js';
 import PackOut from './routes/PackOut.js';
 import Reports from './Reports.js';
+import UserList from './dashboards/management/users/UserList.js';
+import UserEdit from './models/UserEdit.js';
 
 class App extends Component {
   render() {
@@ -38,6 +40,8 @@ class App extends Component {
           <PrivateRoute path='/pack-out/:id/details' exact={true} component={PackOut}/>
           <PrivateRoute path='/reports' exact={true} component={Reports}/>
           <PrivateRoute path='/models/new' exact={true} component={ModelEdit}/>
+          <PrivateRoute path='/management/users' exact={true} component={UserList}/>
+          <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>
         </Switch>
       </Router>
     )
