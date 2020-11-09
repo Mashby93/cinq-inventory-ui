@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute.js';
 import ProductList from './models/ProductList';
 import ProductReceivables from './routes/listings/ProductReceivables';
 import ReceiveProduct from './routes/ReceiveProduct';
@@ -23,20 +24,20 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/login' exact={true} component={Login}/>
-          <Route path='/products' exact={true} component={ProductList}/>
-          <Route path='/products/:id/details' exact={true} component={ProductEdit}/>
-          <Route path='/receivables' exact={true} component={ProductReceivables}/>
-          <Route path='/receivables/receive' exact={true} component={ReceiveProduct}/>
-          <Route path='/receivables/:id/receive' exact={true} component={ReceiveProduct}/>
-          <Route path='/cosmetics' exact={true} component={CosmeticReceivable}/>
-          <Route path='/repair' exact={true} component={RepairProductList}/>
-          <Route path='/repair/:id/details' exact={true} component={RepairProduct}/>
-          <Route path='/qa' exact={true} component={QAList}/>
-          <Route path='/qa/:id/details' exact={true} component={QaProduct}/>
-          <Route path='/pack-out' exact={true} component={PackOutList}/>
-          <Route path='/pack-out/:id/details' exact={true} component={PackOut}/>
-          <Route path='/reports' exact={true} component={Reports}/>
-          <Route path='/models/new' exact={true} component={ModelEdit}/>
+          <PrivateRoute path='/products' exact={true} component={ProductList}/>
+          <PrivateRoute path='/products/:id/details' exact={true} component={ProductEdit}/>
+          <PrivateRoute path='/receivables' exact={true} component={ProductReceivables}/>
+          <PrivateRoute path='/receivables/receive' exact={true} component={ReceiveProduct}/>
+          <PrivateRoute path='/receivables/:id/receive' exact={true} component={ReceiveProduct}/>
+          <PrivateRoute path='/cosmetics' exact={true} component={CosmeticReceivable}/>
+          <PrivateRoute path='/repair' exact={true} component={RepairProductList}/>
+          <PrivateRoute path='/repair/:id/details' exact={true} component={RepairProduct}/>
+          <PrivateRoute path='/qa' exact={true} component={QAList}/>
+          <PrivateRoute path='/qa/:id/details' exact={true} component={QaProduct}/>
+          <PrivateRoute path='/pack-out' exact={true} component={PackOutList}/>
+          <PrivateRoute path='/pack-out/:id/details' exact={true} component={PackOut}/>
+          <PrivateRoute path='/reports' exact={true} component={Reports}/>
+          <PrivateRoute path='/models/new' exact={true} component={ModelEdit}/>
         </Switch>
       </Router>
     )

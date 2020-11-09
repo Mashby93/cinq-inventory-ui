@@ -20,6 +20,11 @@ export default class AppNavbar extends Component {
     });
   }
 
+  handleLogout() {
+    AuthService.logout();
+    window.location.reload();
+  }
+
   render() {
     const user = this.state.user;
 
@@ -56,7 +61,7 @@ export default class AppNavbar extends Component {
                 </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem tag="a" href="/blah">Manage Account</DropdownItem>
-                <DropdownItem tag="a" href="/blah">Log out</DropdownItem>
+                <DropdownItem onClick={() => this.handleLogout()}>Log out</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </NavItem>
