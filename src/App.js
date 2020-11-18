@@ -18,6 +18,7 @@ import PackOut from './routes/PackOut.js';
 import Reports from './Reports.js';
 import UserList from './dashboards/management/users/UserList.js';
 import UserEdit from './models/UserEdit.js';
+import EditRoles from './dashboards/management/users/EditRoles.js';
 
 class App extends Component {
   render() {
@@ -42,6 +43,7 @@ class App extends Component {
           <PrivateRoute path='/models/new' exact={true} component={ModelEdit}/>
           <PrivateRoute path='/management/users' exact={true} component={UserList}/>
           <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>
+          <PrivateRoute path='/management/users/:id/roles' exact={true} component={EditRoles}/>
         </Switch>
       </Router>
     )

@@ -33,10 +33,11 @@ class UserList extends Component {
         <td style={{whiteSpace: 'nowrap'}}>{user.firstName}</td>
         <td style={{whiteSpace: 'nowrap'}}>{user.lastName}</td>
         <td style={{whiteSpace: 'nowrap'}}>{user.userName}</td>
-        <td style={{whiteSpace: 'nowrap'}}>{user.roles}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{user.roles.length}</td>
         <td>
           <ButtonGroup>
             <Button size="sm" color="primary" tag={Link} to={"/management/users/" + user.id + "/edit"}>Edit User</Button>
+            <Button size="sm" color="danger" tag={Link} to={"/management/users/" + user.id + "/roles"}>Edit Roles</Button>
           </ButtonGroup>
         </td>
       </tr>

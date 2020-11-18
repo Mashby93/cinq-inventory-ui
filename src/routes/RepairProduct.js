@@ -5,6 +5,8 @@ import AppNavbar from '../AppNavbar';
 import ItemsList from '../components/ItemsList';
 import Select from 'react-select';
 
+import ProductService from '../services/ProductService';
+
 class RepairProduct extends Component {
 
   emptyItem = {
@@ -15,6 +17,7 @@ class RepairProduct extends Component {
     plot: {},
     supplier: {},
     metadata: {
+      notes: [],
       checkList: {
         items: [{
           name: '',
@@ -34,11 +37,13 @@ class RepairProduct extends Component {
     super(props);
     this.state = {
       item: this.emptyItem,
-      errorCodes: []
+      errorCodes: [],
+      note:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeErrorCode = this.handleChangeErrorCode.bind(this);
+    this.handleAddNote = this.handleAddNote.bind(this);
   }
 
 
@@ -48,6 +53,10 @@ class RepairProduct extends Component {
 
     if (id) {
       item = await (await fetch(`/api/products/${this.props.match.params.id}`)).json();
+    }
+
+    if (!item.metadata.notes) {
+      item.metadata.notes = [];
     }
 
     const errorCodes = await (await fetch('/api/errors/')).json();
@@ -110,8 +119,28 @@ class RepairProduct extends Component {
     });
   }
 
+  handleAddNote(event) {
+    event.preventDefault();
+    let {item} = this.state;
+    let promise = ProductService.addNote(item.id, this.state.note);
+
+    promise.then(data => {
+      item.metadata.notes = data;
+    });
+
+    this.setState({item: item, errorCodes: this.state.errorCodes, note:""});
+  }
+
+  handleChangeNote(event) {
+    this.setState({note: event.target.value})
+  }
+
   render() {
     const {item} = this.state;
+
+    const notes = item.metadata.notes.map(n => {
+      return <div> {n} </div>
+    })
 
     const checkList = item.metadata.checkList.items.map(i => {
       let data = Object.keys(i.items).map((k, t) => {
@@ -170,6 +199,14 @@ class RepairProduct extends Component {
         <h4> Serial Number: {item.serialNumber} </h4>
         <Form onSubmit={this.handleSubmit}>
         <Select options={options} onChange={(event) => {this.handleChangeErrorCode(event)}} value = {val}/>
+        </Form>
+        <h4> Notes:</h4>
+        {notes}
+        <Form onSubmit={this.handleAddNote}>
+        <FormGroup>
+          <Input type="text" name="note" id="note" onChange={(event) => this.handleChangeNote(event)}/>
+          <Button color="primary" type="submit">Add</Button>
+        </FormGroup>
         </Form>
         </td>
         </tr>

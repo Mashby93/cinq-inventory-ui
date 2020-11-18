@@ -13,6 +13,7 @@ class QaProduct extends Component {
     plot: {},
     supplier: {},
     metadata: {
+      notes: {},
       errorCode: {
         id: '',
         code: '',
