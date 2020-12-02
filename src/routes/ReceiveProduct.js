@@ -3,48 +3,27 @@ import { Button, Container, Form, FormGroup, Input, Label, DropdownToggle, Dropd
 import AppNavbar from '../AppNavbar';
 import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
+import axios from "axios";
+
+const API_URL = "http://localhost:8080/api/";
 
 class ReceiveProduct extends Component {
 
-  emptyItem = {
-    id: null,
-    createdAt: '',
-    updatedAt: '',
-    model: {
-      id: '',
-      modelNumber: '',
-      metaData: {
-        checkList: {
-        items: [{
-          name: '',
-          items:{}
-        }]
-      }}
-    },
-    serialNumber: '',
-    plot: null,
-    supplier: {
-      id: ''
-    },
-    metadata: {
-      routeStatus: '',
-      technician: 'Test User',
-      checkList: {
-        items: [{
-          name: '',
-          items:{}
-        }]
-      }
-    }
-  };
 
 constructor(props) {
   super(props);
 
   this.state = {
-    item: this.emptyItem,
+    id: "",
     suppliers: [],
-    models:[]
+    supplier: {
+      id: "",
+      name: ""
+    },
+    model: "",
+    serial: "",
+    models:[],
+    error: ""
   };
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,72 +33,75 @@ constructor(props) {
 }
 
 async componentDidMount() {
-  var item = this.state.item;
   const id = this.props.match.params.id;
-
-  if (id) {
-    item = await (await fetch(`/api/products/${id}`)).json();
-  }
 
   const suppliers = await (await fetch('/api/supplier/')).json();
   const models = await (await fetch('/api/models/')).json()
-  this.setState({item: item, suppliers:suppliers.content, models:models.content});
+
+  if (id) {
+    var item = await (await fetch(`/api/receive/${id}`)).json();
+    console.log(item);
+    this.setState({suppliers:suppliers.content, supplier: item.supplier, model: item.model.modelNumber, serial: item.serial, models:models.content});
+  } else {
+    this.setState({suppliers:suppliers.content, models:models.content});
+  }
+
 }
 
 async handleChangeSerial(event) {
   const target = event.target;
   const value = target.value;
-  const name = target.name;
-  let item = {...this.state.item};
-  item.serialNumber = value;
-  this.setState({item: item, suppliers: this.state.suppliers, models: this.state.models});
+
+  this.setState({serial: value, suppliers: this.state.suppliers, models: this.state.models});
 }
 
 async handleChangeModel(event) {
-  let item = {...this.state.item};
-  console.log(event);
-  item.model.modelNumber = event.target.value;
-  console.log(item);
-  this.setState({item: item, suppliers: this.state.suppliers, models: this.state.models});
+  this.setState({model: event.target.value, suppliers: this.state.suppliers, models: this.state.models});
 }
 
 async handleChangeSupplier(event) {
   const value = event.value;
-  let item = {...this.state.item};
   const suppliers = this.state.suppliers.filter(supplier => supplier.id === value);
+  var supplier = "";
+
   if (suppliers.length > 0) {
-    item.supplier = suppliers[0];
+    supplier = suppliers[0];
   }
-  console.log(item);
-  this.setState({item: item, suppliers: this.state.suppliers, models: this.state.models});
+
+  this.setState({supplier: supplier, suppliers: this.state.suppliers, models: this.state.models});
 }
 
 handleSubmit(event) {
   event.preventDefault();
-  const {item} = this.state;
-  item.metadata.routeStatus = 'RECEIVED';
-  const models = this.state.models.filter(model => model.modelNumber === item.model.modelNumber);
-  if (models.length > 0) {
-    item.model = models[0];
-    item.metadata.checkList = item.model.metaData.checkList;
+  const id = this.props.match.params.id;
+
+  if (id) {
+    axios.patch(API_URL + "routes/receive", null, {
+      params: {
+        id: this.state.id,
+        modelNumber: this.state.model,
+        supplierId: this.state.supplier.id,
+        serial: this.state.serial
+      }
+    })
+  } else {
+    axios.post(API_URL + "routes/receive", null, {
+      params: {
+        modelNumber: this.state.model,
+        supplierId: this.state.supplier.id,
+        serial: this.state.serial
+      }
+    });
   }
-  console.log(item);
-  fetch('/api/products', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(item),
-  });
+
 }
 
 render() {
 
-  if (!(this.state || this.state.item || this.state.suppliers)) {
+  if (!(this.state || this.state.suppliers)) {
     return "Loading...";
   }
-  const item = this.state.item;
+
   //console.log(this.state.suppliers);
   const data = this.state.suppliers;
 
@@ -128,25 +110,25 @@ render() {
     "label" : d.name
   }));
 
-  const val = options.filter(o => o.value === item.supplier.id);
-  //const val = options.filter(o => o.value === item.supplier.id);
+  const val = options.filter(o => o.value === this.state.supplier.id);
 
   return <div>
     <AppNavbar/>
     <Container>
       <h2>Receive Product</h2>
+      <h2>{this.state.error}</h2>
       <Form onSubmit={this.handleSubmit}>
+      <FormGroup>
+        <Label for="supplier">Supplier</Label>
+        <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+      </FormGroup>
         <FormGroup>
           <Label for="modelNumber">Model Number</Label>
-          <Input type="text" name="modelNumber" id="modelNumber" value={item.model.modelNumber} onChange={(event) => this.handleChangeModel(event)}/>
+          <Input type="text" name="modelNumber" id="modelNumber" disabled = {(val.length == 0) ? "disabled" : ""} value={this.state.model} onChange={(event) => this.handleChangeModel(event)}/>
         </FormGroup>
         <FormGroup>
           <Label for="serialNumber">Serial Number</Label>
-          <Input type="text" name="serialNumber" id="serialNumber" value={item.serialNumber} onChange={this.handleChangeSerial}/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="supplier">Supplier</Label>
-          <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+          <Input type="text" name="serialNumber" id="serialNumber" disabled = {(val.length == 0) ? "disabled" : ""} value={this.state.serial} onChange={this.handleChangeSerial}/>
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>

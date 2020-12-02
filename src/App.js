@@ -19,6 +19,7 @@ import Reports from './Reports.js';
 import UserList from './dashboards/management/users/UserList.js';
 import UserEdit from './models/UserEdit.js';
 import EditRoles from './dashboards/management/users/EditRoles.js';
+import EditSupplier from './models/EditSupplier.js';
 
 class App extends Component {
   render() {
