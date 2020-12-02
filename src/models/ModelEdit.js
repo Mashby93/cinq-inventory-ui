@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Container, Table, Form, FormGroup, Input, Label } 
 import AppNavbar from '../AppNavbar';
 import Footer from '../Footer';
 import { Link } from 'react-router-dom';
+import Select from 'react-select';
 
 class ModelEdit extends Component {
 
@@ -10,16 +11,16 @@ class ModelEdit extends Component {
     modelNumber: '',
     color: '',
     description: '',
-    metaData: {
-      checkList: {
-        items: []
-      }
+    supplier: {
+      id:"",
+      name: ""
     }
   };
 
   constructor(props) {
     super(props);
-    this.state = {item: this.model , isLoading: true};
+    this.state = {item: this.model , suppliers: [], isLoading: true};
+    this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
   }
 
   handleChange(event) {
@@ -29,6 +30,22 @@ class ModelEdit extends Component {
     let item = {...this.state.item};
     item[name] = value;
     this.setState({item});
+  }
+
+  async componentDidMount() {
+    var item = this.state.item;
+    const id = this.props.match.params.id;
+
+    if (id) {
+      item = await (await fetch(`/api/routes/reciece/${id}`)).json();
+    }
+
+    const suppliers = await (await fetch('/api/supplier/')).json();
+    this.setState({item: item, suppliers:suppliers.content});
+  }
+
+  handleChangeSupplier(event) {
+
   }
 
   async handleSubmit(event) {
@@ -51,11 +68,24 @@ class ModelEdit extends Component {
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Model' : 'Create Model'}</h2>;
 
+    const data = this.state.suppliers;
+
+    const options = data.map(d => ({
+      "value" : d.id,
+      "label" : d.name
+    }));
+
+    const val = options.filter(o => o.value === item.supplier.id);
+
       return <div>
         <AppNavbar/>
         <Container>
           {title}
           <Form onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <Label for="supplier">Supplier</Label>
+            <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+          </FormGroup>
             <FormGroup>
               <Label for="modelNumber">Model Number</Label>
               <Input type="text" name="modelNumber" id="modelNumber" value={item.name || ''}
