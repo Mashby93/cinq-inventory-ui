@@ -19,6 +19,7 @@ import Reports from './Reports.js';
 import UserList from './dashboards/management/users/UserList.js';
 import UserEdit from './models/UserEdit.js';
 import EditRoles from './dashboards/management/users/EditRoles.js';
+import Home from './Home.js';
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/login' exact={true} component={Login}/>
+          <PrivateRoute path='/' exact={true} component={Home}/>
           <PrivateRoute path='/products' exact={true} component={ProductList}/>
           <PrivateRoute path='/products/:id/details' exact={true} component={ProductEdit}/>
           <PrivateRoute path='/receivables' exact={true} component={ProductReceivables}/>
