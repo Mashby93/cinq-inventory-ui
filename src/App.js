@@ -20,6 +20,12 @@ import UserList from './dashboards/management/users/UserList.js';
 import UserEdit from './models/UserEdit.js';
 import EditRoles from './dashboards/management/users/EditRoles.js';
 import EditSupplier from './models/EditSupplier.js';
+import ReportListings from './dashboards/management/reports/ReportListings.js';
+import CheckListListings from './dashboards/management/checklists/ListCheckLists.js';
+import ModelTypesListings from './dashboards/management/types/ListModelTypes.js';
+import ErrorCodeListings from './dashboards/management/errors/ErrorCodeListing.js';
+import Home from './Home.js';
+import CreateSupplier from './models/CreateSupplier';
 
 class App extends Component {
   render() {
@@ -28,6 +34,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/login' exact={true} component={Login}/>
+          <PrivateRoute path='/' exact={true} component={Home}/>
           <PrivateRoute path='/products' exact={true} component={ProductList}/>
           <PrivateRoute path='/products/:id/details' exact={true} component={ProductEdit}/>
           <PrivateRoute path='/receivables' exact={true} component={ProductReceivables}/>
@@ -41,10 +48,15 @@ class App extends Component {
           <PrivateRoute path='/pack-out' exact={true} component={PackOutList}/>
           <PrivateRoute path='/pack-out/:id/details' exact={true} component={PackOut}/>
           <PrivateRoute path='/reports' exact={true} component={Reports}/>
-          <PrivateRoute path='/models/new' exact={true} component={ModelEdit}/>
           <PrivateRoute path='/management/users' exact={true} component={UserList}/>
           <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/roles' exact={true} component={EditRoles}/>
+          <PrivateRoute path='/management/supplier' exact={true} component={CreateSupplier}/>
+          <PrivateRoute path='/management/model' exact={true} component={ModelEdit}/>
+          <PrivateRoute path='/management/reports' exact={true} component={ReportListings}/>
+          <PrivateRoute path='/management/checklists' exact={true} component={CheckListListings}/>
+          <PrivateRoute path='/management/types' exact={true} component={ModelTypesListings}/>
+          <PrivateRoute path='/management/errors' exact={true} component={ErrorCodeListings}/>
         </Switch>
       </Router>
     )

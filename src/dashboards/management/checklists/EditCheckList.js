@@ -5,9 +5,9 @@ import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
-class ModelEdit extends Component {
+class EditCheckList extends Component {
 
-  model = {
+  item = {
     modelNumber: '',
     color: '',
     description: '',

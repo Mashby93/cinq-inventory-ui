@@ -3,7 +3,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import AuthService from "./AuthService";
+import UserService from "../services/UserService";
+import AppNavbar from '../AppNavbar';
+import Footer from '../Footer';
+import axios from "axios";
 
 const required = value => {
   if (!value) {
@@ -15,34 +18,27 @@ const required = value => {
   }
 };
 
-export default class Login extends Component {
+export default class CreateSupplier extends Component {
   constructor(props) {
     super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
+      name: "",
+      loading: false
     };
   }
 
-  onChangeUsername(e) {
+
+  onChangeName(e) {
     this.setState({
-      username: e.target.value
+      name: e.target.value
     });
   }
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
 
-  handleLogin(e) {
+  handleSubmit(e) {
     e.preventDefault();
 
     this.setState({
@@ -53,64 +49,35 @@ export default class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.history.push("/");
-          window.location.reload();
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
-    } else {
-      this.setState({
-        loading: false
-      });
+      axios.post("API_URL", {
+         params: {
+           name: this.state.name
+         }
+       });
     }
   }
 
   render() {
     return (
+      <div>
+        <AppNavbar/>
       <div className="col-md-12">
         <div className="card card-container">
-          <img src={process.env.PUBLIC_URL + '/cinq-logo.png'} height="100" width="100" class="center"></img>
-
           <Form
             onSubmit={this.handleLogin}
             ref={c => {
               this.form = c;
             }}
           >
+
             <div className="form-group">
-              <label htmlFor="username">Email</label>
+              <label htmlFor="name">Name</label>
               <Input
                 type="text"
                 className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
+                name="name"
+                value={this.state.name}
+                onChange={this.onChangeName}
                 validations={[required]}
               />
             </div>
@@ -123,7 +90,7 @@ export default class Login extends Component {
                 {this.state.loading && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
-                <span>Login</span>
+                <span>Save</span>
               </button>
             </div>
 
@@ -142,6 +109,8 @@ export default class Login extends Component {
             />
           </Form>
         </div>
+      </div>
+      <Footer/>
       </div>
     );
   }

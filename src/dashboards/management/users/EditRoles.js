@@ -5,6 +5,7 @@ import CheckButton from "react-validation/build/button";
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 
 import AppNavbar from "../../../AppNavbar.js";
+import Footer from "../../../Footer.js";
 import UserService from '../../../services/UserService.js';
 import ManagementService from "../../../services/ManagementService.js";
 
@@ -103,6 +104,7 @@ export default class UserRoles extends Component {
             <Button color="success" type="submit">Save</Button>{' '}
           </Form>
         </div>
+        <Footer/>
       </div>
     );
   }

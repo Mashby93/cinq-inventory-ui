@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../../AppNavbar';
+import Footer from '../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../components/LoadingScreen';
 
@@ -125,6 +126,7 @@ class PackOutList extends Component {
             </tbody>
           </Table>
         </Container>
+        <Footer/>
       </div>
     );
   }
