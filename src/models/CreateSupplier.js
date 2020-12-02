@@ -4,6 +4,9 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import UserService from "../services/UserService";
+import AppNavbar from '../AppNavbar';
+import Footer from '../Footer';
+import axios from "axios";
 
 const required = value => {
   if (!value) {
@@ -46,7 +49,7 @@ export default class CreateSupplier extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      axios.post(API_URL, {
+      axios.post("API_URL", {
          params: {
            name: this.state.name
          }
@@ -56,6 +59,8 @@ export default class CreateSupplier extends Component {
 
   render() {
     return (
+      <div>
+        <AppNavbar/>
       <div className="col-md-12">
         <div className="card card-container">
           <Form
@@ -104,6 +109,8 @@ export default class CreateSupplier extends Component {
             />
           </Form>
         </div>
+      </div>
+      <Footer/>
       </div>
     );
   }
