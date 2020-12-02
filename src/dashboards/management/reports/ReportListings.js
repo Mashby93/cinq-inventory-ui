@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../../AppNavbar';
+import AppNavbar from '../../../AppNavbar';
+import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
-import LoadingScreen from '../../components/LoadingScreen';
+import LoadingScreen from '../../../components/LoadingScreen';
 
 class ReportListings extends Component {
 
@@ -16,7 +17,7 @@ class ReportListings extends Component {
 
     fetch('/api/reports')
       .then(response => response.json())
-      .then(data => this.setState({reports: data, isLoading: false}));
+      .then(data => this.setState({reports: [], isLoading: false}));
   }
 
   render() {
@@ -26,13 +27,13 @@ class ReportListings extends Component {
       return <LoadingScreen/>;
     }
 
-    const reporttList = reports.map(report => {
-      return <tr key={product.id}>
+    const reportList = reports.map(report => {
+      return <tr key={report.id}>
         <td style={{whiteSpace: 'nowrap'}}>{report.name}</td>
         <td style={{whiteSpace: 'nowrap'}}>{report.reportStatus}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/receivables/" + product.id + "/receive"}>Download</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/receivables/" + report.id + "/receive"}>Download</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -43,7 +44,7 @@ class ReportListings extends Component {
         <AppNavbar/>
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/receivables/receive">Receive Product</Button>
+            <Button color="success" tag={Link} to="/receivables/receive">Generate Report</Button>
           </div>
           <Table className="mt-4">
             <thead>
@@ -57,9 +58,10 @@ class ReportListings extends Component {
             </tbody>
           </Table>
         </Container>
+        <Footer/>
       </div>
     );
   }
 }
 
-export default ProductReceivables;
+export default ReportListings;
