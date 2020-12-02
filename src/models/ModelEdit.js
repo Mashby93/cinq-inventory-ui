@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from '../AppNavbar';
+import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 
 class ModelEdit extends Component {
@@ -76,6 +77,7 @@ class ModelEdit extends Component {
             </FormGroup>
           </Form>
         </Container>
+        <Footer/>
       </div>
 
       ;
