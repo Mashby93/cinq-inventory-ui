@@ -11,6 +11,10 @@ class ModelEdit extends Component {
     modelNumber: '',
     color: '',
     description: '',
+    type: {
+      id: "",
+      name: ""
+    },
     supplier: {
       id:"",
       name: ""
@@ -19,8 +23,9 @@ class ModelEdit extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {item: this.model , suppliers: [], isLoading: true};
+    this.state = {item: this.model , suppliers: [], types:[], isLoading: true};
     this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
+    this.handleChangeType = this.handleChangeType.bind(this);
   }
 
   handleChange(event) {
@@ -34,18 +39,28 @@ class ModelEdit extends Component {
 
   async componentDidMount() {
     var item = this.state.item;
-    const id = this.props.match.params.id;
-
-    if (id) {
-      item = await (await fetch(`/api/routes/reciece/${id}`)).json();
-    }
-
     const suppliers = await (await fetch('/api/supplier/')).json();
     this.setState({item: item, suppliers:suppliers.content});
   }
 
   handleChangeSupplier(event) {
+    let item = {...this.state.item};
+    let supplier = this.state.suppliers.filter(s => s.id == event.value);
 
+    if (supplier.length > 0) {
+      item["supplier"] = supplier[0];
+      this.setState({item: item});
+    }
+  }
+
+  handleChangeType(event) {
+    let item = this.state.item;
+    let type = this.state.types.filter(t => t.id == event.value);
+
+    if (type.length > 0) {
+      item["type"] = type[0];
+      this.setState({item: item});
+    }
   }
 
   async handleSubmit(event) {
@@ -77,6 +92,13 @@ class ModelEdit extends Component {
 
     const val = options.filter(o => o.value === item.supplier.id);
 
+    const types = this.state.types.map(t => ({
+      "value" : t.id,
+      "label" : t.name
+    }));
+
+    const type = types.filter(t => t.value === item.type.id);
+
       return <div>
         <AppNavbar/>
         <Container>
@@ -88,7 +110,7 @@ class ModelEdit extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="supplier">Type</Label>
-            <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+            <Select options={types} onChange={this.handleChangeType} value={type}/>
           </FormGroup>
             <FormGroup>
               <Label for="modelNumber">Model Number</Label>

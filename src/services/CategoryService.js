@@ -38,6 +38,14 @@ class CategoryService {
       });
   }
 
+  getAllBulk() {
+    return axios.get(API_URL + "/bulk")
+      .then(response => {
+        console.log(response);
+        return response.data;
+      })
+  }
+
   save(category) {
     return axios.post(API_URL, {
       JSON.stringify(item);
