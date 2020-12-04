@@ -18,17 +18,23 @@ class ModelEdit extends Component {
     supplier: {
       id:"",
       name: ""
+    },
+    metadata: {
+      checkList:{
+        id:""
+      }
     }
   };
 
   constructor(props) {
     super(props);
-    this.state = {item: this.model , suppliers: [], types:[], isLoading: true};
+    this.state = {item: this.model , suppliers: [], types:[], checklists:[], isLoading: true};
     this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
     this.handleChangeModel = this.handleChangeModel.bind(this);
     this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
+    this.handleChangeCheckList = this.handleChangeCheckList.bind(this);
   }
 
   handleChange(event) {
@@ -64,6 +70,17 @@ class ModelEdit extends Component {
       item["type"] = type[0];
       this.setState({item: item});
     }
+  }
+
+  handleChangeCheckList(event) {
+    let item = this.state.item;
+    let checklist = this.state.checklists.filter(t => t.id == event.value);
+
+    if (checklist.length > 0) {
+      item.metadata["checkList"] = checklist[0];
+      this.setState({item: item});
+    }
+
   }
 
   handleChangeColor(event) {
@@ -120,6 +137,13 @@ class ModelEdit extends Component {
 
     const type = types.filter(t => t.value === item.type.id);
 
+    const checklists = this.state.checklists.map(t => ({
+      "value" : t.id,
+      "label" : t.name
+    }));
+
+    const cl = checklists.filter(t => t.value === item.metadata.checkList.id);
+
       return <div>
         <AppNavbar/>
         <Container>
@@ -130,8 +154,12 @@ class ModelEdit extends Component {
             <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
           </FormGroup>
           <FormGroup>
-            <Label for="supplier">Type</Label>
+            <Label for="type">Type</Label>
             <Select options={types} onChange={this.handleChangeType} value={type}/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="checklist">Checklist</Label>
+            <Select options={checklists} onChange={this.handleChangeCheckList} value={cl}/>
           </FormGroup>
             <FormGroup>
               <Label for="modelNumber">Model Number</Label>
