@@ -5,11 +5,11 @@ import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
 
-class ErrorCodeListings extends Component {
+class ListCategories extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {errorCodes: [], isLoading: true};
+    this.state = {categories: [], isLoading: true};
   }
 
   componentDidMount() {
@@ -17,20 +17,18 @@ class ErrorCodeListings extends Component {
   }
 
   render() {
-    const {errorCodes, isLoading} = this.state;
+    const {categories, isLoading} = this.state;
 
     if (isLoading) {
       return <LoadingScreen/>;
     }
 
-    const reportList = errorCodes.map(errorCode => {
-      return <tr key={errorCode.id}>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.type.name}</td>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.name}</td>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.description}</td>
+    const reportList = categories.map(category => {
+      return <tr key={category.id}>
+        <td style={{whiteSpace: 'nowrap'}}>{category.name}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/receivables/" + errorCode.id + "/receive"}>View/Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/categories/" + category.id}>View/Edit</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -41,14 +39,12 @@ class ErrorCodeListings extends Component {
         <AppNavbar/>
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/receivables/receive">Create Error Code</Button>
+            <Button color="success" tag={Link} to="/management/categories/new">Create category</Button>
           </div>
           <Table className="mt-4">
             <thead>
             <tr>
-              <th width="10%">Category</th>
               <th width="10%">Name</th>
-              <th width="10%">Description</th>
             </tr>
             </thead>
             <tbody>
@@ -62,4 +58,4 @@ class ErrorCodeListings extends Component {
   }
 }
 
-export default ErrorCodeListings;
+export default categoryListings;
