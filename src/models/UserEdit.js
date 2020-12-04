@@ -34,7 +34,7 @@ export default class UserEdit extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.id !== 'new') {
+    if (this.props.match.params.id) {
       let promise = UserService.getUser(this.props.match.params.id);
 
       promise.then(user => {

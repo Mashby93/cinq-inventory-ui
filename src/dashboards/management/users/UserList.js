@@ -49,6 +49,9 @@ class UserList extends Component {
         <AppNavbar/>
 
         <Container fluid>
+        <div className="float-right">
+          <Button color="success" tag={Link} to="/management/users/new">Create User</Button>
+        </div>
           <Table className="mt-4">
             <thead>
             <tr>
