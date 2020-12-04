@@ -67,7 +67,7 @@ class EditCheckList extends Component {
   handleAddItem(event) {
     var item = this.state.item;
     var category = item.items.filter(cat => this.state.categoryToChange == cat.name);
-    category[0].items.[this.state.newItem] = "false";
+    category[0].items[this.state.newItem] = "false";
     this.setState({item: item, newItem: ""});
   }
 
