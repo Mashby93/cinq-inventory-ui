@@ -4,6 +4,7 @@ import AppNavbar from '../../../AppNavbar';
 import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
+import ErrorCodeService from '../../../services/ErrorCodeService';
 
 class ErrorCodeListings extends Component {
 
@@ -13,7 +14,10 @@ class ErrorCodeListings extends Component {
   }
 
   componentDidMount() {
-    this.setState({isLoading: false});
+    ErrorCodeService.getAll(1,30)
+    .then(data => {
+      this.setState({errorCodes:data.content, isLoading: false});
+    });
   }
 
   render() {

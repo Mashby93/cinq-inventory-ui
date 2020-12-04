@@ -29,6 +29,16 @@ class ErrorCodeService {
       });
   }
 
+  getById(id) {
+    return axios
+      .get(API_URL + "/" + id, {
+      })
+      .then(response => {
+        console.log(response);
+        return response.data;
+      });
+  }
+
   getAll(pageNumber, pageSize) {
     return axios
       .get(API_URL, {
