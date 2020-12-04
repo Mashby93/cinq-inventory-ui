@@ -26,6 +26,9 @@ class ModelEdit extends Component {
     this.state = {item: this.model , suppliers: [], types:[], isLoading: true};
     this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
+    this.handleChangeModel = this.handleChangeModel.bind(this);
+    this.handleChangeColor = this.handleChangeColor.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
   }
 
   handleChange(event) {
@@ -61,6 +64,24 @@ class ModelEdit extends Component {
       item["type"] = type[0];
       this.setState({item: item});
     }
+  }
+
+  handleChangeColor(event) {
+    let item = this.state.item;
+    item["color"] = event.target.value;
+    this.setState({item: item});
+  }
+
+  handleChangeModel(event) {
+    let item = this.state.item;
+    item["modelNumber"] = event.target.value;
+    this.setState({item: item});
+  }
+
+  handleChangeDescription(event) {
+    let item = this.state.item;
+    item["description"] = event.target.value;
+    this.setState({item: item});
   }
 
   async handleSubmit(event) {
@@ -114,18 +135,18 @@ class ModelEdit extends Component {
           </FormGroup>
             <FormGroup>
               <Label for="modelNumber">Model Number</Label>
-              <Input type="text" name="modelNumber" id="modelNumber" value={item.name || ''}
-                     onChange={this.handleChange} autoComplete="address-level1"/>
+              <Input type="text" name="modelNumber" id="modelNumber" value={item.name}
+                     onChange={this.handleChangeModel} autoComplete="address-level1"/>
             </FormGroup>
             <FormGroup>
               <Label for="color">Color</Label>
-              <Input type="text" name="color" id="color" value={item.color || ''}
-                     onChange={this.handleChange} autoComplete="address-level1"/>
+              <Input type="text" name="color" id="color" value={item.color}
+                     onChange={this.handleChangeColor} autoComplete="address-level1"/>
             </FormGroup>
             <FormGroup>
               <Label for="description">Description</Label>
-              <Input type="text" name="description" id="description" value={item.description || ''}
-                     onChange={this.handleChange} autoComplete="address-level1"/>
+              <Input type="text" name="description" id="description" value={item.description}
+                     onChange={this.handleChangeDescription} autoComplete="address-level1"/>
             </FormGroup>
             <FormGroup>
               <Button color="primary" type="submit">Save</Button>{' '}
