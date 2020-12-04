@@ -24,6 +24,7 @@ import ReportListings from './dashboards/management/reports/ReportListings.js';
 import CheckListListings from './dashboards/management/checklists/ListCheckLists.js';
 import ModelTypesListings from './dashboards/management/types/ListModelTypes.js';
 import ErrorCodeListings from './dashboards/management/errors/ErrorCodeListing.js';
+import EditCheckList from './dashboards/management/checklists/EditCheckList.js';
 import Home from './Home.js';
 import CreateSupplier from './models/CreateSupplier';
 
@@ -55,6 +56,7 @@ class App extends Component {
           <PrivateRoute path='/management/model' exact={true} component={ModelEdit}/>
           <PrivateRoute path='/management/reports' exact={true} component={ReportListings}/>
           <PrivateRoute path='/management/checklists' exact={true} component={CheckListListings}/>
+          <PrivateRoute path='/management/checklists/new' exact={true} component={EditCheckList}/>
           <PrivateRoute path='/management/types' exact={true} component={ModelTypesListings}/>
           <PrivateRoute path='/management/errors' exact={true} component={ErrorCodeListings}/>
         </Switch>

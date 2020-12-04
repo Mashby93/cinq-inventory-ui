@@ -24,11 +24,11 @@ class CheckListListings extends Component {
     }
 
     const reportList = checklists.map(checklist => {
-      return <tr key={checklist.name}>
-        <td style={{whiteSpace: 'nowrap'}}>{checklist.name}</td>
+      return <tr key={checklist.id}>
+        <td style={{whiteSpace: 'nowrap'}}>{checklist.id}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/receivables/" + checklist.name + "/receive"}>View/Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/receivables/" + checklist.id + "/receive"}>View/Edit</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -39,7 +39,7 @@ class CheckListListings extends Component {
         <AppNavbar/>
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/receivables/receive">Create Checklist</Button>
+            <Button color="success" tag={Link} to="/management/checklists/new">Create Checklist</Button>
           </div>
           <Table className="mt-4">
             <thead>

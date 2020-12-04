@@ -86,6 +86,10 @@ class ModelEdit extends Component {
             <Label for="supplier">Supplier</Label>
             <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
           </FormGroup>
+          <FormGroup>
+            <Label for="supplier">Type</Label>
+            <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+          </FormGroup>
             <FormGroup>
               <Label for="modelNumber">Model Number</Label>
               <Input type="text" name="modelNumber" id="modelNumber" value={item.name || ''}
