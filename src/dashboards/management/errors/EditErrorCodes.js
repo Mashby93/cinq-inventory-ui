@@ -16,7 +16,8 @@ constructor(props) {
   };
 
   this.handleSubmit = this.handleSubmit.bind(this);
-  this.handleChangeName = this.handleChangeName.bind(this);
+  this.handleChangeCode = this.handleChangeCode.bind(this);
+  this.handleChangeDescription = this.handleChangeDescription.bind(this);
 }
 
 handleChangeCode(event) {
@@ -82,7 +83,7 @@ render() {
   return <div>
     <AppNavbar/>
     <Container>
-      <h2>Create Supplier</h2>
+      <h2>Create Error Code</h2>
       <Form onSubmit={this.handleSubmit}>
       <FormGroup>
         <Label for="type">Type</Label>
