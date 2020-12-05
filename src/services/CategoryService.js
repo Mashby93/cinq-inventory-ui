@@ -47,8 +47,16 @@ class CategoryService {
   }
 
   save(category) {
-    return axios.post(API_URL, {
-      JSON.stringify(item);
+    return axios({
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: API_URL,
+      data: JSON.stringify(category)
+    })
+    .then(response => {
+      return response.data;
     });
   }
 

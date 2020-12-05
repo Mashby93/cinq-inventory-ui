@@ -39,7 +39,7 @@ class ListCategories extends Component {
         <AppNavbar/>
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/management/categories/new">Create category</Button>
+            <Button color="success" tag={Link} to="/management/types/new">Create category</Button>
           </div>
           <Table className="mt-4">
             <thead>
@@ -58,4 +58,4 @@ class ListCategories extends Component {
   }
 }
 
-export default categoryListings;
+export default ListCategories;

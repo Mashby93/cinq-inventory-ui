@@ -1,17 +1,17 @@
 import React, { Component, useState } from 'react';
 import { Button, Container, Form, FormGroup, Input, Label, DropdownToggle, DropdownMenu, DropdownItem, Dropdown } from 'reactstrap';
-import AppNavbar from '../AppNavbar';
+import AppNavbar from '../../../AppNavbar';
 import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
-import ErrorCodeService from '../../../services/CategoryService';
+import CategoryService from '../../../services/CategoryService';
 
-class EditErrorCode extends Component {
+class EditCategory extends Component {
 
 constructor(props) {
   super(props);
 
   this.state = {
-    item: CategoryService.getEmptyItem();
+    item: CategoryService.getEmptyItem()
   };
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,4 +66,4 @@ render() {
 }
 }
 
-export default withRouter(EditErrorCode);
+export default withRouter(EditCategory);

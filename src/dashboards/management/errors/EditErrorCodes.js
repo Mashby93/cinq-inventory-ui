@@ -4,6 +4,7 @@ import AppNavbar from '../../../AppNavbar';
 import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import ErrorCodeService from '../../../services/ErrorCodeService';
+import CategoryService from '../../../services/CategoryService';
 
 class EditErrorCode extends Component {
 
@@ -34,11 +35,17 @@ handleChangeDescription(event) {
 
 componentDidMount() {
   const id = this.props.match.params.id;
+  CategoryService.getAllBulk()
+  .then(types => {
+    this.setState({types: types});
+  });
 
   if (id) {
     let item = ErrorCodeService.getById(id);
     this.setState({item: item});
   }
+
+
 }
 
 handleChangeType(event) {
