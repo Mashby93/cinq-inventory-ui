@@ -3,6 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
+import SupplierService from "../services/UserService";
 import UserService from "../services/UserService";
 import AppNavbar from '../AppNavbar';
 import Footer from '../Footer';
@@ -64,7 +65,7 @@ export default class CreateSupplier extends Component {
       <div className="col-md-12">
         <div className="card card-container">
           <Form
-            onSubmit={this.handleLogin}
+            onSubmit={this.handleSubmit}
             ref={c => {
               this.form = c;
             }}

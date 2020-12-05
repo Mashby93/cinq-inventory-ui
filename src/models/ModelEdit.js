@@ -5,6 +5,9 @@ import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
+import CategoryService from '../services/CategoryService';
+import SupplierService from '../services/SupplierService';
+
 class ModelEdit extends Component {
 
   model = {
@@ -12,7 +15,7 @@ class ModelEdit extends Component {
     color: '',
     description: '',
     type: {
-      id: "",
+      id: null,
       name: ""
     },
     supplier: {
@@ -37,19 +40,16 @@ class ModelEdit extends Component {
     this.handleChangeCheckList = this.handleChangeCheckList.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    let item = {...this.state.item};
-    item[name] = value;
-    this.setState({item});
-  }
 
-  async componentDidMount() {
+  componentDidMount() {
     var item = this.state.item;
-    const suppliers = await (await fetch('/api/supplier/')).json();
-    this.setState({item: item, suppliers:suppliers.content});
+
+    SupplierService.getAllBulk().then(s => {
+      this.setState({suppliers: s});
+    })
+    CategoryService.getAllBulk().then(t => {
+      this.setState({types: t});
+      });
   }
 
   handleChangeSupplier(event) {

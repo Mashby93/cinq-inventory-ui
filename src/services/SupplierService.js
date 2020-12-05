@@ -3,30 +3,15 @@ import qs from 'qs';
 
 import AuthService from "../AuthService";
 
-const API_URL = "http://localhost:8080/api/errors";
+const API_URL = "http://localhost:8080/api/supplier";
 
-class ErrorCodeService {
+class CategoryService {
 
   getEmptyItem() {
     return {
       id: null,
-      code: "",
-      description: "",
-      category: {}
+      name: ""
     };
-  }
-
-  getByTypeId(typeId) {
-    return axios
-      .get(API_URL + "/filtered", {
-        params: {
-          typeId: typeId,
-        }
-      })
-      .then(response => {
-        console.log(response);
-        return response.data;
-      });
   }
 
   getById(id) {
@@ -53,6 +38,30 @@ class ErrorCodeService {
       });
   }
 
+  getAllBulk() {
+    return axios({
+      method: 'get',
+      url: API_URL + "/bulk"})
+      .then(response => {
+        console.log(response);
+        return response.data;
+      })
+  }
+
+  save(category) {
+    return axios({
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: API_URL,
+      data: JSON.stringify(category)
+    })
+    .then(response => {
+      return response.data;
+    });
+  }
+
 }
 
-export default new ErrorCodeService;
+export default new CategoryService;

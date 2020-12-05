@@ -28,7 +28,6 @@ import ErrorCodeListings from './dashboards/management/errors/ErrorCodeListing.j
 import EditErrorCode from './dashboards/management/errors/EditErrorCodes.js';
 import EditCheckList from './dashboards/management/checklists/EditCheckList.js';
 import Home from './Home.js';
-import CreateSupplier from './models/CreateSupplier';
 
 class App extends Component {
   render() {
@@ -55,7 +54,7 @@ class App extends Component {
           <PrivateRoute path='/management/users/new' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/roles' exact={true} component={EditRoles}/>
-          <PrivateRoute path='/management/supplier' exact={true} component={CreateSupplier}/>
+          <PrivateRoute path='/management/supplier' exact={true} component={EditSupplier}/>
           <PrivateRoute path='/management/model' exact={true} component={ModelEdit}/>
           <PrivateRoute path='/management/reports' exact={true} component={ReportListings}/>
           <PrivateRoute path='/management/checklists' exact={true} component={CheckListListings}/>

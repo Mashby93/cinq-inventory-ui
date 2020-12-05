@@ -8,7 +8,7 @@ class EditSupplier extends Component {
 
   emptyItem = {
     id: null,
-    location: {},
+    location: null,
     name: ''
   };
 
@@ -58,7 +58,7 @@ render() {
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label for="modelNumber">Supplier Name</Label>
-          <Input type="text" name="supplierName" id="supplierName" value={item.name} onChange={(event) => this.handleChangeModel(event)}/>
+          <Input type="text" name="supplierName" id="supplierName" value={item.name} onChange={(event) => this.handleChangeName(event)}/>
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>
