@@ -5,17 +5,13 @@ import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
+import ChecklistService from '../../../services/ChecklistService';
+
 class EditCheckList extends Component {
 
   item = {
-    id: "",
-    items: [
-    {
-      items: {
-      },
-      name: ""
-    }
-  ]
+    id: null,
+    items: []
 };
 
   constructor(props) {
@@ -30,6 +26,7 @@ class EditCheckList extends Component {
     this.handleAddItem = this.handleAddItem.bind(this);
     this.handleAddCategory = this.handleAddCategory.bind(this);
     this.handleRemoveCategory = this.handleRemoveCategory.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -110,19 +107,11 @@ class EditCheckList extends Component {
     this.setState({item: item});
   }
 
-  async handleSubmit(event) {
+  handleSubmit(event) {
     event.preventDefault();
-    const {item} = this.state;
 
-    await fetch('/api/models', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item),
-    });
-    this.props.history.push('/groups');
+    ChecklistService.save(this.state.item);
+    //this.props.history.push('/groups');
   }
 
   render() {
@@ -185,6 +174,9 @@ class EditCheckList extends Component {
             </td>
             <td>
             {data}
+            <FormGroup>
+              <Button color="primary" onClick={this.handleSubmit}>Save</Button>{' '}
+            </FormGroup>
             </td>
           </tr>
           </Form>
