@@ -4,6 +4,7 @@ import AppNavbar from '../../../AppNavbar';
 import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
+import ChecklistService from '../../../services/ChecklistService';
 
 class CheckListListings extends Component {
 
@@ -13,6 +14,10 @@ class CheckListListings extends Component {
   }
 
   componentDidMount() {
+    ChecklistService.getAllBulk()
+      .then(data => {
+        this.setState({checklists: data});
+      })
     this.setState({isLoading: false});
   }
 

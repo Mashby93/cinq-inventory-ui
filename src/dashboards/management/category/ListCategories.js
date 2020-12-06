@@ -4,6 +4,7 @@ import AppNavbar from '../../../AppNavbar';
 import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
+import CategoryService from '../../../services/CategoryService';
 
 class ListCategories extends Component {
 
@@ -13,6 +14,10 @@ class ListCategories extends Component {
   }
 
   componentDidMount() {
+    CategoryService.getAllBulk()
+      .then(data => {
+        this.setState({categories: data});
+      })
     this.setState({isLoading: false});
   }
 

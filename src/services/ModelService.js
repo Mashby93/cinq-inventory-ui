@@ -3,30 +3,15 @@ import qs from 'qs';
 
 import AuthService from "../AuthService";
 
-const API_URL = "http://localhost:8080/api/errors";
+const API_URL = "http://localhost:8080/api/models";
 
-class ErrorCodeService {
+class ModelService {
 
   getEmptyItem() {
     return {
-      id: null,
-      code: "",
-      description: "",
-      type: {}
+      id: "",
+      name: ""
     };
-  }
-
-  getByTypeId(typeId) {
-    return axios
-      .get(API_URL + "/filtered", {
-        params: {
-          typeId: typeId,
-        }
-      })
-      .then(response => {
-        console.log(response);
-        return response.data;
-      });
   }
 
   getById(id) {
@@ -77,4 +62,4 @@ class ErrorCodeService {
 
 }
 
-export default new ErrorCodeService;
+export default new ModelService;

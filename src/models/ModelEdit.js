@@ -7,6 +7,8 @@ import Select from 'react-select';
 
 import CategoryService from '../services/CategoryService';
 import SupplierService from '../services/SupplierService';
+import ChecklistService from '../services/ChecklistService';
+import ModelService from '../services/ModelService';
 
 class ModelEdit extends Component {
 
@@ -14,7 +16,7 @@ class ModelEdit extends Component {
     modelNumber: '',
     color: '',
     description: '',
-    type: {
+    category: {
       id: null,
       name: ""
     },
@@ -22,9 +24,9 @@ class ModelEdit extends Component {
       id:"",
       name: ""
     },
-    metadata: {
+    metaData: {
       checkList:{
-        id:""
+        id: null
       }
     }
   };
@@ -38,6 +40,7 @@ class ModelEdit extends Component {
     this.handleChangeColor = this.handleChangeColor.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeCheckList = this.handleChangeCheckList.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
@@ -50,6 +53,9 @@ class ModelEdit extends Component {
     CategoryService.getAllBulk().then(t => {
       this.setState({types: t});
       });
+    ChecklistService.getAllBulk().then(c => {
+      this.setState({checklists: c});
+    })
   }
 
   handleChangeSupplier(event) {
@@ -67,7 +73,7 @@ class ModelEdit extends Component {
     let type = this.state.types.filter(t => t.id == event.value);
 
     if (type.length > 0) {
-      item["type"] = type[0];
+      item["category"] = type[0];
       this.setState({item: item});
     }
   }
@@ -77,9 +83,11 @@ class ModelEdit extends Component {
     let checklist = this.state.checklists.filter(t => t.id == event.value);
 
     if (checklist.length > 0) {
-      item.metadata["checkList"] = checklist[0];
+      item.metaData["checkList"] = checklist[0];
       this.setState({item: item});
     }
+
+    console.log(this.state.item);
 
   }
 
@@ -104,15 +112,7 @@ class ModelEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
-
-    await fetch('/api/models', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item),
-    });
+    ModelService.save(item);
     this.props.history.push('/groups');
   }
 
@@ -135,14 +135,14 @@ class ModelEdit extends Component {
       "label" : t.name
     }));
 
-    const type = types.filter(t => t.value === item.type.id);
+    const type = types.filter(t => t.value === item.category.id);
 
     const checklists = this.state.checklists.map(t => ({
       "value" : t.id,
-      "label" : t.name
+      "label" : t.id
     }));
 
-    const cl = checklists.filter(t => t.value === item.metadata.checkList.id);
+    const cl = checklists.filter(t => t.value === item.metaData.checkList.id);
 
       return <div>
         <AppNavbar/>

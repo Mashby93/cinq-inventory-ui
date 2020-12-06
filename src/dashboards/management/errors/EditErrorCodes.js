@@ -19,6 +19,7 @@ constructor(props) {
   this.handleSubmit = this.handleSubmit.bind(this);
   this.handleChangeCode = this.handleChangeCode.bind(this);
   this.handleChangeDescription = this.handleChangeDescription.bind(this);
+  this.handleChangeType = this.handleChangeType.bind(this);
 }
 
 handleChangeCode(event) {
@@ -53,7 +54,7 @@ handleChangeType(event) {
   let type = this.state.types.filter(t => t.id == event.value);
 
   if (type.length > 0) {
-    item["category"] = type[0];
+    item["type"] = type[0];
     this.setState({item: item});
   }
 }
@@ -62,14 +63,7 @@ handleSubmit(event) {
   event.preventDefault();
   const {item} = this.state;
 
-  fetch('/api/supplier', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(item),
-  });
+  ErrorCodeService.save(item);
 }
 
 render() {
@@ -98,11 +92,11 @@ render() {
       </FormGroup>
         <FormGroup>
           <Label for="code">Error Code</Label>
-          <Input type="text" name="code" id="code" value={item.name} onChange={(event) => this.handleChangeModel(event)}/>
+          <Input type="text" name="code" id="code" value={item.name} onChange={this.handleChangeCode}/>
         </FormGroup>
         <FormGroup>
           <Label for="description">Description</Label>
-          <Input type="text" name="description" id="description" value={item.name} onChange={(event) => this.handleChangeModel(event)}/>
+          <Input type="text" name="description" id="description" value={item.name} onChange={this.handleChangeDescription}/>
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>

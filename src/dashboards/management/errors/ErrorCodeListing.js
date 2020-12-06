@@ -4,6 +4,7 @@ import AppNavbar from '../../../AppNavbar';
 import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
+import ErrorCodeService from '../../../services/ErrorCodeService';
 
 class ErrorCodeListings extends Component {
 
@@ -13,6 +14,10 @@ class ErrorCodeListings extends Component {
   }
 
   componentDidMount() {
+    ErrorCodeService.getAllBulk()
+    .then(data => {
+      this.setState({errorCodes: data});
+    })
     this.setState({isLoading: false});
   }
 
@@ -26,7 +31,7 @@ class ErrorCodeListings extends Component {
     const reportList = errorCodes.map(errorCode => {
       return <tr key={errorCode.id}>
         <td style={{whiteSpace: 'nowrap'}}>{errorCode.type.name}</td>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.name}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{errorCode.code}</td>
         <td style={{whiteSpace: 'nowrap'}}>{errorCode.description}</td>
         <td>
           <ButtonGroup>
@@ -47,7 +52,7 @@ class ErrorCodeListings extends Component {
             <thead>
             <tr>
               <th width="10%">Category</th>
-              <th width="10%">Name</th>
+              <th width="10%">Code</th>
               <th width="10%">Description</th>
             </tr>
             </thead>

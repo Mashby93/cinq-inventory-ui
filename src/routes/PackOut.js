@@ -94,7 +94,7 @@ render() {
     "label" : d.name
   }));
 
-  const val = options.filter(o => o.value === item.supplier.id);
+  const val = options.filter(o => o.value === item.model.supplier.id);
   //const val = options.filter(o => o.value === item.supplier.id);
 
   return <div>
@@ -106,7 +106,7 @@ render() {
           <h4> Technician: {item.metadata.technician || "Uknown"} </h4>
           <h4> Model Number: {item.model.modelNumber} </h4>
           <h4> Serial Number: {item.serialNumber} </h4>
-          <h4> Error Code: {item.metadata.errorCode.code + " - " + item.metadata.errorCode.description} </h4>
+          <h4> Error Code: {item.metadata.errorCode ? item.metadata.errorCode.code + " - " + item.metadata.errorCode.description : ""} </h4>
       </td>
       </tr>
       <tr>

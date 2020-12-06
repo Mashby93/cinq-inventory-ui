@@ -118,7 +118,7 @@ class ProductList extends Component {
       const val = options.filter(o => o.label === product.metadata.cosmeticCode);
 
       return <tr key={product.id}>
-        <td style={{whiteSpace: 'nowrap'}}>{product.supplier.name}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{product.model.supplier.name}</td>
         <td style={{whiteSpace: 'nowrap'}}>{product.model.modelNumber}</td>
         <td style={{whiteSpace: 'nowrap'}}>{product.serialNumber}</td>
         <td style={{whiteSpace: 'nowrap'}}>{modelDescription}</td>
