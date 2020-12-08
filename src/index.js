@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import AuthService from './AuthService';
 
-axios.defaults.headers.common['Authorization'] = AuthService.getAuthToken();
+const user = AuthService.getCurrentUser();
+axios.defaults.headers.common['Authorization'] = user ? AuthService.getAuthToken() : "";
 
 ReactDOM.render(
   <React.StrictMode>

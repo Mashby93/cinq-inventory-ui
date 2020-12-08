@@ -6,14 +6,16 @@ const API_URL = "http://localhost:8080/api/management/";
 class ManagementService {
 
   editUserRoles(id, roles) {
-    return axios.patch(API_URL + "user/roles", null, {
-      params: {
-        id: id,
-        roles:roles
+    return axios({
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
       },
-      paramsSerializer: params => {
-    return qs.stringify(params, {arrayFormat: 'repeat'})
-  }
+      url: API_URL + "users/roles",
+      data: roles,
+      params: {
+        userId: id
+      }
     }).then(response => {
       console.log(response);
       return response.status
