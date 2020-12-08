@@ -82,7 +82,7 @@ render() {
   const type = types.filter(t => t.value === item.type.id);
 
   return <div>
-    <AppNavbar/>
+    
     <Container>
       <h2>Create Error Code</h2>
       <Form onSubmit={this.handleSubmit}>

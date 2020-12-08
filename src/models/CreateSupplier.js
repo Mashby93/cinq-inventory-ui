@@ -61,7 +61,7 @@ export default class CreateSupplier extends Component {
   render() {
     return (
       <div>
-        <AppNavbar/>
+        
       <div className="col-md-12">
         <div className="card card-container">
           <Form
@@ -111,7 +111,7 @@ export default class CreateSupplier extends Component {
           </Form>
         </div>
       </div>
-      <Footer/>
+      
       </div>
     );
   }

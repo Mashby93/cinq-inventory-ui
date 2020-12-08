@@ -78,7 +78,7 @@ class QAList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
         <h6> Filters </h6>
         <input

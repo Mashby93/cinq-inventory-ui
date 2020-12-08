@@ -52,7 +52,7 @@ render() {
   const item = this.state.item;
 
   return <div>
-    <AppNavbar/>
+    
     <Container>
       <h2>Create Supplier</h2>
       <Form onSubmit={this.handleSubmit}>

@@ -11,7 +11,7 @@ export default class LoadingScreen extends Component {
   render() {
     return (
       <div>
-      <AppNavbar/>
+      
       </div>
     );
   }

@@ -79,7 +79,7 @@ class RepairProductList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
 
         <Container fluid>
         <h6> Filters </h6>

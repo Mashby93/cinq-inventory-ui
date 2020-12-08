@@ -46,7 +46,7 @@ class UserList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
 
         <Container fluid>
         <div className="float-right">
@@ -67,7 +67,7 @@ class UserList extends Component {
           </Table>
         </Container>
 
-        <Footer/>
+        
       </div>
     );
   }

@@ -36,7 +36,7 @@ class ModelTypesListings extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/receivables/receive">Create Category</Button>
@@ -52,7 +52,7 @@ class ModelTypesListings extends Component {
             </tbody>
           </Table>
         </Container>
-        <Footer/>
+        
       </div>
     );
   }

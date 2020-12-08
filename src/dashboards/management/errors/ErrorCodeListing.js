@@ -43,7 +43,7 @@ class ErrorCodeListings extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/management/errors/new">Create Error Code</Button>
@@ -61,7 +61,7 @@ class ErrorCodeListings extends Component {
             </tbody>
           </Table>
         </Container>
-        <Footer/>
+        
       </div>
     );
   }

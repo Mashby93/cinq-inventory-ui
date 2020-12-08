@@ -178,7 +178,7 @@ class RepairProduct extends Component {
     }
 
     return <div>
-      <AppNavbar/>
+      
       <Container>
         <h2> Repair Route </h2>
         <tr>

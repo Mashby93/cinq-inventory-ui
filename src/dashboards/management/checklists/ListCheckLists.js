@@ -41,7 +41,7 @@ class CheckListListings extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/management/checklists/new">Create Checklist</Button>
@@ -57,7 +57,7 @@ class CheckListListings extends Component {
             </tbody>
           </Table>
         </Container>
-        <Footer/>
+        
       </div>
     );
   }

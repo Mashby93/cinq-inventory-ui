@@ -140,7 +140,7 @@ class ProductList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
         <h6> Filters </h6>
         <input

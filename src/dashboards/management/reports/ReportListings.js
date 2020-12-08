@@ -25,14 +25,10 @@ class ReportListings extends Component {
   }
 
   handleDownloadReport(reportId) {
-    ReportService.download(reportId);
-  }
-
-  handleDownloadReportOld(reportId) {
     ReportService.download(reportId)
     .then(response => {
 
-    let contentDisposition = response.headers.['content-disposition'];
+    let contentDisposition = response.headers['content-disposition'];
     let fileName = contentDisposition.substring(contentDisposition.lastIndexOf('=') + 1);
 
     // These code section is adapted from an example of the StreamSaver.js
@@ -78,7 +74,7 @@ class ReportListings extends Component {
         <td style={{whiteSpace: 'nowrap'}}>{report.reportStatus}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" onClick={this.handleDownloadReport(report.id)}>Download</Button>
+            <Button size="sm" color="primary" onClick={() => this.handleDownloadReport(report.id)}>Download</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -86,7 +82,7 @@ class ReportListings extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/reports/new">Generate Report</Button>
@@ -103,7 +99,7 @@ class ReportListings extends Component {
             </tbody>
           </Table>
         </Container>
-        <Footer/>
+
       </div>
     );
   }

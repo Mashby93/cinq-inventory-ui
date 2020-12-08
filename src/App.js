@@ -30,12 +30,15 @@ import EditCheckList from './dashboards/management/checklists/EditCheckList.js';
 import GenerateReport from './dashboards/management/reports/GenerateReport.js';
 import Home from './Home.js';
 
+import MainLayout from './MainLayout';
+
 class App extends Component {
   render() {
 
     return (
       <Router>
         <Switch>
+        <MainLayout>
           <Route path='/login' exact={true} component={Login}/>
           <PrivateRoute path='/' exact={true} component={Home}/>
           <PrivateRoute path='/products' exact={true} component={ProductList}/>
@@ -66,6 +69,7 @@ class App extends Component {
           <PrivateRoute path='/management/errors' exact={true} component={ErrorCodeListings}/>
           <PrivateRoute path='/management/errors/new' exact={true} component={EditErrorCode}/>
           <PrivateRoute path='/management/errors/:id' exact={true} component={EditErrorCode}/>
+          </MainLayout>
         </Switch>
       </Router>
     )

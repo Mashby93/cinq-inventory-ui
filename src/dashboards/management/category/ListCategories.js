@@ -41,7 +41,7 @@ class ListCategories extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/management/types/new">Create category</Button>

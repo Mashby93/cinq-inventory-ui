@@ -145,7 +145,7 @@ class EditCheckList extends Component {
     });
 
       return <div>
-        <AppNavbar/>
+
         <Container>
           {title}
           <Form onSubmit={this.handleSubmit}>
@@ -181,7 +181,7 @@ class EditCheckList extends Component {
           </tr>
           </Form>
         </Container>
-        <Footer/>
+
       </div>
 
       ;

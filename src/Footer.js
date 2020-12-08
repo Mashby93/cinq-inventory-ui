@@ -28,9 +28,9 @@ export default class Footer extends Component {
   render() {
     return (
     <div style={phantom}>
-      <div style={style}>Version 0.0.1-BETA</div>
+      <div style={style}>Version 1.0.0</div>
     </div>
   );
   }
-  
+
 }

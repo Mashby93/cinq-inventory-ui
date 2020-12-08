@@ -113,7 +113,7 @@ render() {
   const val = options.filter(o => o.value === this.state.supplier.id);
 
   return <div>
-    <AppNavbar/>
+    
     <Container>
       <h2>Receive Product</h2>
       <h2>{this.state.error}</h2>

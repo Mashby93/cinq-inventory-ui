@@ -48,7 +48,6 @@ render() {
   const item = this.state.item;
 
   return <div>
-    <AppNavbar/>
     <Container>
       <h2>Manage Category</h2>
       <Form onSubmit={this.handleSubmit}>

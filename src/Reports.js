@@ -61,7 +61,7 @@ class Reports extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
           <Table className="mt-4">
             <thead>

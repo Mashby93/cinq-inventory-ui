@@ -145,7 +145,7 @@ class ModelEdit extends Component {
     const cl = checklists.filter(t => t.value === item.metaData.checkList.id);
 
       return <div>
-        <AppNavbar/>
+        
         <Container>
           {title}
           <Form onSubmit={this.handleSubmit}>
@@ -182,7 +182,7 @@ class ModelEdit extends Component {
             </FormGroup>
           </Form>
         </Container>
-        <Footer/>
+        
       </div>
 
       ;

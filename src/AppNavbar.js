@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import AuthService from "./AuthService";
+import IdleService from "./services/IdleService";
 
 export default class AppNavbar extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class AppNavbar extends Component {
 
   render() {
     const user = this.state.user;
+    const roles = ["Test"];
 
     return <Navbar color="dark" dark expand="md" sticky="top">
       <NavbarBrand tag={Link} to="/"><a href="#" class="pull-left"><img src={process.env.PUBLIC_URL + '/cinq-logo.png'} height="50" width="50"></img></a> </NavbarBrand>

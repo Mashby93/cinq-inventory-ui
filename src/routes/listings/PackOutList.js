@@ -94,7 +94,7 @@ class PackOutList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
         <h6> Filters </h6>
         <input
@@ -126,7 +126,7 @@ class PackOutList extends Component {
             </tbody>
           </Table>
         </Container>
-        <Footer/>
+        
       </div>
     );
   }

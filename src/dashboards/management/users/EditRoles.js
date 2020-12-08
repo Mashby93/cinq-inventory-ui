@@ -91,7 +91,7 @@ export default class UserRoles extends Component {
 
     return (
       <div className="col-md-12">
-        <AppNavbar/>
+        
         <div className="card card-container">
         <h4>{this.state.lastName}, {this.state.firstName}</h4>
           <Form
@@ -104,7 +104,7 @@ export default class UserRoles extends Component {
             <Button color="success" type="submit">Save</Button>{' '}
           </Form>
         </div>
-        <Footer/>
+        
       </div>
     );
   }

@@ -60,7 +60,7 @@ class ProductEdit extends Component {
     const title = <h2>{item.id ? 'Edit Group' : 'Add Group'}</h2>;
 
     return <div>
-      <AppNavbar/>
+      
       <Container>
         {title}
         <Form onSubmit={this.handleSubmit}>

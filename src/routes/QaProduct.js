@@ -117,7 +117,7 @@ class QaProduct extends Component {
 
 
     return <div>
-      <AppNavbar/>
+      
       <Container>
         <h2> QA Route </h2>
         <tr>

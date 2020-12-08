@@ -59,7 +59,7 @@ class ProductList extends Component {
 
     return (
       <div>
-        <AppNavbar/>
+        
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/products/new">Add Product</Button>

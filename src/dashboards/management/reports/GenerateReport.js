@@ -40,7 +40,7 @@ handleSubmit(event) {
 render() {
 
   return <div>
-    <AppNavbar/>
+    
     <Container>
       <h2>Generate Report</h2>
       <Form onSubmit={this.handleSubmit}>
