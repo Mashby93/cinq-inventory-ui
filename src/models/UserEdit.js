@@ -25,6 +25,7 @@ export default class UserEdit extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
+      id: null,
       firstName: "",
       lastName: "",
       loading: false,
@@ -64,7 +65,7 @@ export default class UserEdit extends Component {
 
   onChangeEmail(e) {
     this.setState({
-      email: e.target.value
+      emailAddress: e.target.value
     })
   }
 
