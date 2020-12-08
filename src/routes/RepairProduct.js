@@ -6,6 +6,7 @@ import ItemsList from '../components/ItemsList';
 import Select from 'react-select';
 
 import ProductService from '../services/ProductService';
+import AuthService from '../AuthService';
 
 class RepairProduct extends Component {
 
@@ -94,6 +95,7 @@ class RepairProduct extends Component {
 
   async handleReject(item) {
     item.metadata.routeStatus = 'READY_FOR_QA';
+    this.setTechnician(item);
 
     await fetch('/api/products', {
       method: 'POST',
@@ -107,7 +109,8 @@ class RepairProduct extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const {item} = this.state;
+    let {item} = this.state;
+    this.setTechnician(item);
 
     await fetch('/api/products', {
       method: 'POST',
@@ -117,6 +120,10 @@ class RepairProduct extends Component {
       },
       body: JSON.stringify(item),
     });
+  }
+
+  setTechnician(item) {
+    item.metadata["techName"] = AuthService.getCurrentUser().id;
   }
 
   handleAddNote(event) {
@@ -178,7 +185,7 @@ class RepairProduct extends Component {
     }
 
     return <div>
-      
+
       <Container>
         <h2> Repair Route </h2>
         <tr>

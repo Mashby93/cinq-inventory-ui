@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import AuthService from "./AuthService";
 import IdleService from "./services/IdleService";
 
-const roles = ["RECEIVER",
-    "COSMETIC",
-    "TECHNICIAN",
-    "QA",
-    "SHIPPER"];
 
 export default class AppNavbar extends Component {
   constructor(props) {
@@ -27,6 +22,8 @@ export default class AppNavbar extends Component {
       user:this.state.user
     });
   }
+
+
 
   handleLogout() {
     AuthService.logout();
