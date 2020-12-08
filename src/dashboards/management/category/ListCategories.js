@@ -41,7 +41,6 @@ class ListCategories extends Component {
 
     return (
       <div>
-        
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/management/types/new">Create category</Button>
@@ -57,7 +56,7 @@ class ListCategories extends Component {
             </tbody>
           </Table>
         </Container>
-        <Footer/>
+
       </div>
     );
   }
