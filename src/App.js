@@ -27,6 +27,7 @@ import EditCategory from './dashboards/management/category/EditCategory.js';
 import ErrorCodeListings from './dashboards/management/errors/ErrorCodeListing.js';
 import EditErrorCode from './dashboards/management/errors/EditErrorCodes.js';
 import EditCheckList from './dashboards/management/checklists/EditCheckList.js';
+import GenerateReport from './dashboards/management/reports/GenerateReport.js';
 import Home from './Home.js';
 
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
           <PrivateRoute path='/pack-out' exact={true} component={PackOutList}/>
           <PrivateRoute path='/pack-out/:id/details' exact={true} component={PackOut}/>
           <PrivateRoute path='/reports' exact={true} component={Reports}/>
+          <PrivateRoute path='/reports/new' exact={true} component={GenerateReport}/>
           <PrivateRoute path='/management/users' exact={true} component={UserList}/>
           <PrivateRoute path='/management/users/new' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>

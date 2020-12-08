@@ -35,6 +35,11 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
   }
+
+  getAuthToken() {
+    return "Bearer " + this.getCurrentUser()["jwt"];
+  }
 }
+
 
 export default new AuthService();
