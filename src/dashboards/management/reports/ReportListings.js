@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
 import ReportService from '../../../services/ReportService';
 
-import { WritableStream } from 'web-streams-polyfill/ponyfill';
-import streamSaver from 'streamsaver';
+const FileDownload = require('js-file-download');
 
 class ReportListings extends Component {
 
@@ -27,38 +26,11 @@ class ReportListings extends Component {
   handleDownloadReport(reportId) {
     ReportService.download(reportId)
     .then(response => {
+      let contentDisposition = response.headers['content-disposition'];
+      let fileName = contentDisposition.substring(contentDisposition.lastIndexOf('=') + 1);
 
-    let contentDisposition = response.headers['content-disposition'];
-    let fileName = contentDisposition.substring(contentDisposition.lastIndexOf('=') + 1);
-
-    // These code section is adapted from an example of the StreamSaver.js
-    // https://jimmywarting.github.io/StreamSaver.js/examples/fetch.html
-
-    // If the WritableStream is not available (Firefox, Safari), take it from the ponyfill
-    if (!window.WritableStream) {
-        streamSaver.WritableStream = WritableStream;
-        window.WritableStream = WritableStream;
-    }
-
-    const fileStream = streamSaver.createWriteStream(fileName);
-    const readableStream = response.stream;
-
-    console.log(readableStream);
-    // More optimized
-    if (readableStream.pipeTo) {
-        return readableStream.pipeTo(fileStream);
-    }
-
-    window.writer = fileStream.getWriter();
-
-    const reader = response.body.getReader();
-    const pump = () => reader.read()
-        .then(res => res.done
-            ? window.writer.close()
-            : window.writer.write(res.value).then(pump));
-
-    pump();
-});
+      FileDownload(response.data, fileName);
+    });
   }
 
   render() {
