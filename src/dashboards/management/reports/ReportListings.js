@@ -27,7 +27,7 @@ class ReportListings extends Component {
     ReportService.download(reportId)
     .then(response => {
       let contentDisposition = response.headers['content-disposition'];
-      let fileName = contentDisposition.substring(contentDisposition.lastIndexOf('=') + 1);
+      let fileName = contentDisposition.substring(contentDisposition.lastIndexOf('=') + 1).replace(/['"]+/g, '');
 
       FileDownload(response.data, fileName);
     });
