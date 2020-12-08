@@ -55,6 +55,7 @@ class App extends Component {
           <PrivateRoute path='/pack-out/:id/details' exact={true} component={PackOut}/>
           <PrivateRoute path='/reports' exact={true} component={Reports}/>
           <PrivateRoute path='/reports/new' exact={true} component={GenerateReport}/>
+          <PrivateRoute path='/users/:id/edit' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users' exact={true} component={UserList}/>
           <PrivateRoute path='/management/users/new' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>

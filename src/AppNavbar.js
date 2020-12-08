@@ -48,6 +48,9 @@ export default class AppNavbar extends Component {
   render() {
     const user = this.state.user;
 
+    if (!user) {
+      return "";
+    }
     console.log(user);
     var navItems = [];
 
@@ -116,7 +119,7 @@ export default class AppNavbar extends Component {
                 <img src={process.env.PUBLIC_URL + '/person-circle.svg'} height="30" width="30"></img>
                 </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem tag="a" href="/blah">Manage Account</DropdownItem>
+                <DropdownItem tag="a" href={"/users/" + user.id + "/edit"}>Manage Account</DropdownItem>
                 <DropdownItem onClick={() => this.handleLogout()}>Log out</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
