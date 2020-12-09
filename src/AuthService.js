@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/authentication/";
+const API_URL = "http://cinq.myddns.me:8080/api/authentication/";
 
 class AuthService {
   login(username, password) {
