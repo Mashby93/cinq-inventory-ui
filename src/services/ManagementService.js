@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from 'qs';
 
-const API_URL = "http://cinq.myddns.me:8080/api/management/";
+const API_URL = "http://http://18.216.7.74:8080/api/management/";
 
 class ManagementService {
 

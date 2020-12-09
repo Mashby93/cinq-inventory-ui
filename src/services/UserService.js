@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://cinq.myddns.me:8080/api/users/";
+const API_URL = "http://http://18.216.7.74:8080/api/users/";
 
 class UserService {
 

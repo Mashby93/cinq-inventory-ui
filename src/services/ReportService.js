@@ -3,7 +3,7 @@ import qs from 'qs';
 
 import AuthService from "../AuthService";
 
-const API_URL = "http://cinq.myddns.me:8080/api/reports";
+const API_URL = "http://http://18.216.7.74:8080/api/reports";
 
 class ReportService {
 
