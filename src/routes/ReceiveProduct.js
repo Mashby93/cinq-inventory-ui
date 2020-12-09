@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "http://cinq.myddns.me:8080/api/";
 
 class ReceiveProduct extends Component {
 
@@ -113,7 +113,7 @@ render() {
   const val = options.filter(o => o.value === this.state.supplier.id);
 
   return <div>
-    
+
     <Container>
       <h2>Receive Product</h2>
       <h2>{this.state.error}</h2>
