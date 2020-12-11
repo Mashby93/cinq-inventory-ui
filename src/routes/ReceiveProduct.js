@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import axios from "axios";
 
-const API_URL = "http://18.216.7.74:80/api/";
+const API_URL = "/api/";
 
 class ReceiveProduct extends Component {
 

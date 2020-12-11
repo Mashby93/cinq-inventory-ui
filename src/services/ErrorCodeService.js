@@ -3,7 +3,7 @@ import qs from 'qs';
 
 import AuthService from "../AuthService";
 
-const API_URL = "http://18.216.7.74:80/api/errors";
+const API_URL = "/api/errors";
 
 class ErrorCodeService {
 
