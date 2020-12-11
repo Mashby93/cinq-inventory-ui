@@ -37,6 +37,7 @@ class ProductService {
       },
       params: {
         id:id,
+        userId:user.id,
         note:note
       }
     }).then(response => {
