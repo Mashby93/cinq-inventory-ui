@@ -42,11 +42,11 @@ componentDidMount() {
   });
 
   if (id) {
-    let item = ErrorCodeService.getById(id);
-    this.setState({item: item});
+    ErrorCodeService.getById(id)
+    .then(item => {
+      this.setState({item: item});
+    });
   }
-
-
 }
 
 handleChangeType(event) {
