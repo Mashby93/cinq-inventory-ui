@@ -35,12 +35,14 @@ handleSubmit(event) {
   const {startDate, endDate} = this.state;
 
   ReportService.generateReport(startDate.getTime(), endDate.getTime());
+  this.props.history.push("/management/reports");
+  window.location.reload();
 }
 
 render() {
 
   return <div>
-    
+
     <Container>
       <h2>Generate Report</h2>
       <Form onSubmit={this.handleSubmit}>
