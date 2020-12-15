@@ -33,7 +33,7 @@ class ModelEdit extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {item: this.model , suppliers: [], types:[], checklists:[], isLoading: true};
+    this.state = {item: this.model , suppliers: [], types:[], checklists:[], isLoading: true, error:""};
     this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
     this.handleChangeModel = this.handleChangeModel.bind(this);
@@ -117,8 +117,22 @@ class ModelEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
-    ModelService.save(item);
-    this.props.history.push('/');
+    ModelService.save(item)
+    .then(() => {
+      this.props.history.push("/management/models");
+      window.location.reload();
+    }, error => {
+      const resMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.setState({
+        error: resMessage
+      });
+    });
   }
 
   render() {
@@ -153,6 +167,7 @@ class ModelEdit extends Component {
 
         <Container>
           {title}
+          {this.state.error}
           <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="supplier">Supplier</Label>
