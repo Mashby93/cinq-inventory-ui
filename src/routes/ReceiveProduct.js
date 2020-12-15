@@ -88,6 +88,17 @@ handleSubmit(event) {
     .then(() => {
       this.props.history.push("/receivables");
       window.location.reload();
+    }, error => {
+      const resMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.setState({
+        error: resMessage
+      });
     });
   } else {
     axios.post(API_URL + "routes/receive", null, {
@@ -100,6 +111,17 @@ handleSubmit(event) {
     .then(() => {
       this.props.history.push("/receivables");
       window.location.reload();
+    }, error => {
+      const resMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.setState({
+        error: resMessage
+      });
     });
   }
 
