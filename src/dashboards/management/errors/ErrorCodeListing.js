@@ -35,7 +35,7 @@ class ErrorCodeListings extends Component {
         <td style={{whiteSpace: 'nowrap'}}>{errorCode.description}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/management/errors/" + errorCode.id}>View/Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/management/errors/" + errorCode.id  + "/details"}>View/Edit</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -43,7 +43,7 @@ class ErrorCodeListings extends Component {
 
     return (
       <div>
-        
+
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/management/errors/new">Create Error Code</Button>
@@ -61,7 +61,7 @@ class ErrorCodeListings extends Component {
             </tbody>
           </Table>
         </Container>
-        
+
       </div>
     );
   }

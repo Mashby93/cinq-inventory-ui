@@ -13,7 +13,8 @@ constructor(props) {
 
   this.state = {
     item: ErrorCodeService.getEmptyItem(),
-    types: []
+    types: [],
+    error:""
   };
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,6 +37,7 @@ handleChangeDescription(event) {
 
 componentDidMount() {
   const id = this.props.match.params.id;
+
   CategoryService.getAllBulk()
   .then(types => {
     this.setState({types: types});
@@ -63,7 +65,22 @@ handleSubmit(event) {
   event.preventDefault();
   const {item} = this.state;
 
-  ErrorCodeService.save(item);
+  ErrorCodeService.save(item)
+  .then(() => {
+    this.props.history.push("/management/errors");
+    window.location.reload();
+  }, error => {
+    const resMessage =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    this.setState({
+      error: resMessage
+    });
+  });
 }
 
 render() {
@@ -84,7 +101,8 @@ render() {
   return <div>
 
     <Container>
-      <h2>Create Error Code</h2>
+      <h2>Manage Error Code</h2>
+      {this.state.error}
       <Form onSubmit={this.handleSubmit}>
       <FormGroup>
         <Label for="type">Type</Label>

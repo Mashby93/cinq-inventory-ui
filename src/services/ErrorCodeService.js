@@ -69,9 +69,6 @@ class ErrorCodeService {
       },
       url: API_URL,
       data: JSON.stringify(category)
-    })
-    .then(response => {
-      return response.data;
     });
   }
 

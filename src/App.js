@@ -76,7 +76,7 @@ class App extends Component {
           <PrivateRoute path='/management/types/:id/details' exact={true} component={EditCategory}/>
           <PrivateRoute path='/management/errors' exact={true} component={ErrorCodeListings}/>
           <PrivateRoute path='/management/errors/new' exact={true} component={EditErrorCode}/>
-          <PrivateRoute path='/management/errors/:id' exact={true} component={EditErrorCode}/>
+          <PrivateRoute path='/management/errors/:id/details' exact={true} component={EditErrorCode}/>
           </MainLayout>
         </Switch>
       </Router>
