@@ -93,8 +93,8 @@ export default class AppNavbar extends Component {
           <DropdownItem tag="a" href="/management/errors">Manage Error Codes</DropdownItem>
           <DropdownItem tag="a" href="/management/types">Manage Model Categories</DropdownItem>
           <DropdownItem tag="a" href="/management/checklists">Manage Checklists</DropdownItem>
-          <DropdownItem tag="a" href="/management/supplier">Create Supplier</DropdownItem>
-          <DropdownItem tag="a" href="/management/model">Create Model</DropdownItem>
+          <DropdownItem tag="a" href="/management/suppliers">Manage Suppliers</DropdownItem>
+          <DropdownItem tag="a" href="/management/models">Manage Models</DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
       </NavItem>);

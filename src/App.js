@@ -28,6 +28,8 @@ import ErrorCodeListings from './dashboards/management/errors/ErrorCodeListing.j
 import EditErrorCode from './dashboards/management/errors/EditErrorCodes.js';
 import EditCheckList from './dashboards/management/checklists/EditCheckList.js';
 import GenerateReport from './dashboards/management/reports/GenerateReport.js';
+import ModelList from './dashboards/management/models/ModelList.js';
+import SupplierList from './dashboards/management/suppliers/SupplierList.js';
 import Home from './Home.js';
 
 import MainLayout from './MainLayout';
@@ -60,8 +62,12 @@ class App extends Component {
           <PrivateRoute path='/management/users/new' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/edit' exact={true} component={UserEdit}/>
           <PrivateRoute path='/management/users/:id/roles' exact={true} component={EditRoles}/>
-          <PrivateRoute path='/management/supplier' exact={true} component={EditSupplier}/>
-          <PrivateRoute path='/management/model' exact={true} component={ModelEdit}/>
+          <PrivateRoute path='/management/suppliers/new' exact={true} component={EditSupplier}/>
+          <PrivateRoute path='/management/suppliers/:id/details' exact={true} component={EditSupplier}/>
+          <PrivateRoute path='/management/suppliers' exact={true} component={SupplierList}/>
+          <PrivateRoute path='/management/models/new' exact={true} component={ModelEdit}/>
+          <PrivateRoute path='/management/models/:id/details' exact={true} component={ModelEdit}/>
+          <PrivateRoute path='/management/models' exact={true} component={ModelList}/>
           <PrivateRoute path='/management/reports' exact={true} component={ReportListings}/>
           <PrivateRoute path='/management/checklists' exact={true} component={CheckListListings}/>
           <PrivateRoute path='/management/checklists/new' exact={true} component={EditCheckList}/>

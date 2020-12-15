@@ -113,7 +113,7 @@ class ModelEdit extends Component {
     event.preventDefault();
     const {item} = this.state;
     ModelService.save(item);
-    this.props.history.push('/groups');
+    this.props.history.push('/');
   }
 
   render() {
@@ -145,13 +145,13 @@ class ModelEdit extends Component {
     const cl = checklists.filter(t => t.value === item.metaData.checkList.id);
 
       return <div>
-        
+
         <Container>
           {title}
           <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="supplier">Supplier</Label>
-            <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+            <Select options={options} onChange={this.handleChangeSupplier} value={val} required="true"/>
           </FormGroup>
           <FormGroup>
             <Label for="type">Type</Label>
@@ -182,7 +182,7 @@ class ModelEdit extends Component {
             </FormGroup>
           </Form>
         </Container>
-        
+
       </div>
 
       ;
