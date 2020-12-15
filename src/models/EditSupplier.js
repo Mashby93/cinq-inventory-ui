@@ -62,7 +62,7 @@ render() {
   return <div>
 
     <Container>
-      <h2>Create Supplier</h2>
+      <h2>Supplier</h2>
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label for="modelNumber">Supplier Name</Label>
