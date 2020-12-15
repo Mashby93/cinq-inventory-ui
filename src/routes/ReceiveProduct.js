@@ -30,6 +30,7 @@ constructor(props) {
   this.handleChangeModel = this.handleChangeModel.bind(this);
   this.handleChangeSerial = this.handleChangeSerial.bind(this);
   this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
+  this.handleRedirect = this.handleRedirect.bind(this);
 }
 
 async componentDidMount() {
@@ -84,6 +85,10 @@ handleSubmit(event) {
         serial: this.state.serial
       }
     })
+    .then(() => {
+      this.props.history.push("/receivables");
+      window.location.reload();
+    });
   } else {
     axios.post(API_URL + "routes/receive", null, {
       params: {
@@ -91,8 +96,16 @@ handleSubmit(event) {
         supplierId: this.state.supplier.id,
         serial: this.state.serial
       }
+    })
+    .then(() => {
+      this.props.history.push("/receivables");
+      window.location.reload();
     });
   }
+
+}
+
+handleRedirect() {
 
 }
 
