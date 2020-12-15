@@ -33,7 +33,7 @@ class ListCategories extends Component {
         <td style={{whiteSpace: 'nowrap'}}>{category.name}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/types/" + category.id + "/details"}>View/Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/management/types/" + category.id + "/details"}>View/Edit</Button>
           </ButtonGroup>
         </td>
       </tr>

@@ -59,7 +59,7 @@ render() {
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>
-          <Button color="secondary" tag={Link} to="/types">Cancel</Button>
+          <Button color="secondary" tag={Link} to="management/types">Cancel</Button>
         </FormGroup>
       </Form>
     </Container>
