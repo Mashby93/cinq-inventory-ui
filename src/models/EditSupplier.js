@@ -29,6 +29,14 @@ async handleChangeName(event) {
   this.setState({item: item});
 }
 
+async componentDidMount(event) {
+  const id = this.props.match.params.id;
+  if (id) {
+    const group = await (await fetch(`/api/supplier/${id}`)).json();
+    this.setState({item: group});
+  }
+}
+
 handleSubmit(event) {
   event.preventDefault();
   const {item} = this.state;
@@ -52,7 +60,7 @@ render() {
   const item = this.state.item;
 
   return <div>
-    
+
     <Container>
       <h2>Create Supplier</h2>
       <Form onSubmit={this.handleSubmit}>
