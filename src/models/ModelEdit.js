@@ -44,8 +44,13 @@ class ModelEdit extends Component {
   }
 
 
-  componentDidMount() {
-    var item = this.state.item;
+  async componentDidMount() {
+    const id = this.props.match.params.id;
+
+    if (id) {
+      const group = await (await fetch(`/api/models/${id}`)).json();
+      this.setState({item: group});
+    }
 
     SupplierService.getAllBulk().then(s => {
       this.setState({suppliers: s});
@@ -128,21 +133,21 @@ class ModelEdit extends Component {
       "label" : d.name
     }));
 
-    const val = options.filter(o => o.value === item.supplier.id);
+    const val = options.filter(o => item.supplier === undefined || item.supplier === null ? false : o.value === item.supplier.id);
 
     const types = this.state.types.map(t => ({
       "value" : t.id,
       "label" : t.name
     }));
 
-    const type = types.filter(t => t.value === item.category.id);
+    const type = types.filter(t => item.category === undefined || item.category === null ? false : t.value === item.category.id);
 
     const checklists = this.state.checklists.map(t => ({
       "value" : t.id,
       "label" : t.id
     }));
 
-    const cl = checklists.filter(t => t.value === item.metaData.checkList.id);
+    const cl = checklists.filter(t => item.metaData.checkList === undefined || item.metaData.checkList === null ? false : t.value === item.metaData.checkList.id);
 
       return <div>
 
