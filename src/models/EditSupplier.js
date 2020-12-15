@@ -4,6 +4,8 @@ import AppNavbar from '../AppNavbar';
 import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 
+import SupplierService from '../services/SupplierService';
+
 class EditSupplier extends Component {
 
   emptyItem = {
@@ -41,13 +43,21 @@ handleSubmit(event) {
   event.preventDefault();
   const {item} = this.state;
 
-  fetch('/api/supplier', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(item),
+  SupplierService.save(item)
+  .then(() => {
+    this.props.history.push("/management/suppliers");
+    window.location.reload();
+  }, error => {
+    const resMessage =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    this.setState({
+      error: resMessage
+    });
   });
 }
 

@@ -5,7 +5,7 @@ import AuthService from "../AuthService";
 
 const API_URL = "/api/supplier";
 
-class CategoryService {
+class SupplierService {
 
   getEmptyItem() {
     return {
@@ -56,12 +56,9 @@ class CategoryService {
       },
       url: API_URL,
       data: JSON.stringify(category)
-    })
-    .then(response => {
-      return response.data;
     });
   }
 
 }
 
-export default new CategoryService;
+export default new SupplierService;
