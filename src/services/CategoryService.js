@@ -9,7 +9,7 @@ class CategoryService {
 
   getEmptyItem() {
     return {
-      id: "",
+      id: null,
       name: ""
     };
   }

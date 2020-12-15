@@ -28,8 +28,10 @@ componentDidMount() {
   const id = this.props.match.params.id;
 
   if (id) {
-    let item = CategoryService.getById(id);
-    this.setState({item: item});
+    let item = CategoryService.getById(id)
+    .then(item => {
+      this.setState({item: item});
+    });
   }
 }
 
@@ -57,7 +59,7 @@ render() {
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>
-          <Button color="secondary" tag={Link} to="/categories">Cancel</Button>
+          <Button color="secondary" tag={Link} to="/types">Cancel</Button>
         </FormGroup>
       </Form>
     </Container>
