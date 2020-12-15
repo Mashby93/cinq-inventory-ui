@@ -18,7 +18,8 @@ constructor(props) {
   super(props);
 
   this.state = {
-    item: this.emptyItem
+    item: this.emptyItem,
+    error: ""
   };
 
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -73,6 +74,7 @@ render() {
 
     <Container>
       <h2>Supplier</h2>
+      {this.state.error}
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label for="modelNumber">Supplier Name</Label>
