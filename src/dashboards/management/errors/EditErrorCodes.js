@@ -100,7 +100,7 @@ render() {
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>
-          <Button color="secondary" tag={Link} to="/receivables">Cancel</Button>
+          <Button color="secondary" tag={Link} to="/management/errors">Cancel</Button>
         </FormGroup>
       </Form>
     </Container>
