@@ -183,7 +183,7 @@ class ModelEdit extends Component {
           </FormGroup>
             <FormGroup>
               <Label for="modelNumber">Model Number</Label>
-              <Input type="text" name="modelNumber" id="modelNumber" value={item.name}
+              <Input type="text" name="modelNumber" id="modelNumber" value={item.modelNumber}
                      onChange={this.handleChangeModel} autoComplete="address-level1"/>
             </FormGroup>
             <FormGroup>
