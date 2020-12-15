@@ -79,10 +79,10 @@ render() {
     "label" : t.name
   }));
 
-  const type = types.filter(t => t.value === item.type.id);
+  const type = types.filter(t => item.type === undefined || item.type === null ? false : t.value === item.type.id);
 
   return <div>
-    
+
     <Container>
       <h2>Create Error Code</h2>
       <Form onSubmit={this.handleSubmit}>
