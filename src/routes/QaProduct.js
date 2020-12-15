@@ -93,7 +93,7 @@ class QaProduct extends Component {
   render() {
     const {item} = this.state;
 
-    const checkList = item.metadata.checkList.items.map(i => {
+    const checkList = item.metadata.checkList === undefined || item.metadata.checkList === null || item.metadata.checkList.items === undefined || item.metadata.checkList.items === null ? "" : item.metadata.checkList.items.map(i => {
       let data = Object.keys(i.items).map((k, t) => {
         return <tr>
         <td>
@@ -117,7 +117,7 @@ class QaProduct extends Component {
 
 
     return <div>
-      
+
       <Container>
         <h2> QA Route </h2>
         <tr>
