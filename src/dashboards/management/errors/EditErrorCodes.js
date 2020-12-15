@@ -92,11 +92,11 @@ render() {
       </FormGroup>
         <FormGroup>
           <Label for="code">Error Code</Label>
-          <Input type="text" name="code" id="code" value={item.name} onChange={this.handleChangeCode}/>
+          <Input type="text" name="code" id="code" value={item.code} onChange={this.handleChangeCode}/>
         </FormGroup>
         <FormGroup>
           <Label for="description">Description</Label>
-          <Input type="text" name="description" id="description" value={item.name} onChange={this.handleChangeDescription}/>
+          <Input type="text" name="description" id="description" value={item.description} onChange={this.handleChangeDescription}/>
         </FormGroup>
         <FormGroup>
           <Button color="primary" type="submit">Save</Button>
