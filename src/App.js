@@ -26,6 +26,8 @@ import ListCategories from './dashboards/management/category/ListCategories.js';
 import EditCategory from './dashboards/management/category/EditCategory.js';
 import ErrorCodeListings from './dashboards/management/errors/ErrorCodeListing.js';
 import EditErrorCode from './dashboards/management/errors/EditErrorCodes.js';
+import JobCodeListings from './dashboards/management/jobs/JobCodeListings.js';
+import EditJobCode from './dashboards/management/jobs/EditJobCode.js';
 import EditCheckList from './dashboards/management/checklists/EditCheckList.js';
 import GenerateReport from './dashboards/management/reports/GenerateReport.js';
 import ModelList from './dashboards/management/models/ModelList.js';
@@ -77,6 +79,9 @@ class App extends Component {
           <PrivateRoute path='/management/errors' exact={true} component={ErrorCodeListings}/>
           <PrivateRoute path='/management/errors/new' exact={true} component={EditErrorCode}/>
           <PrivateRoute path='/management/errors/:id/details' exact={true} component={EditErrorCode}/>
+          <PrivateRoute path='/management/jobcodes' exact={true} component={JobCodeListings}/>
+          <PrivateRoute path='/management/jobcodes/new' exact={true} component={EditJobCode}/>
+          <PrivateRoute path='/management/jobcodes/:id/details' exact={true} component={EditJobCode}/>
           </MainLayout>
         </Switch>
       </Router>

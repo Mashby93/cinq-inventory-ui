@@ -15,6 +15,7 @@ class QaProduct extends Component {
     plot: {},
     supplier: {},
     metadata: {
+      jobCode: null,
       notes: [],
       errorCode: {
         id: '',
@@ -161,6 +162,7 @@ class QaProduct extends Component {
         <h4> Model Number: {item.model.modelNumber} </h4>
         <h4> Serial Number: {item.serialNumber} </h4>
         <h4> Error Code: {item.metadata.errorCode ? item.metadata.errorCode.code + " - " + item.metadata.errorCode.description : ""} </h4>
+        <h4> Job Code: {item.metadata.jobCode ? item.metadata.jobCode.code + " - " + item.metadata.jobCode.description : ""} </h4>
         <h4> Notes:</h4>
         {notes}
         <Form onSubmit={this.handleAddNote}>

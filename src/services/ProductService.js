@@ -7,6 +7,16 @@ const API_URL = "/api/products/";
 
 class ProductService {
 
+  getById(id) {
+    return axios
+      .get(API_URL + "/" + id, {
+      })
+      .then(response => {
+        console.log(response);
+        return response.data;
+      });
+  }
+
   editUserRoles(id, roles) {
     return axios.patch(API_URL + "user/roles", null, {
       params: {

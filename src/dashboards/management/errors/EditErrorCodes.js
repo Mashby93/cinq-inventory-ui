@@ -101,7 +101,7 @@ render() {
   return <div>
 
     <Container>
-      <h2>Manage Error Code</h2>
+      <h2>Manage Failure Code</h2>
       {this.state.error}
       <Form onSubmit={this.handleSubmit}>
       <FormGroup>

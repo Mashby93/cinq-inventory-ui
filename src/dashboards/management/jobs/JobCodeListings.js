@@ -4,38 +4,37 @@ import AppNavbar from '../../../AppNavbar';
 import Footer from '../../../Footer';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../../components/LoadingScreen';
-import ErrorCodeService from '../../../services/ErrorCodeService';
+import JobCodeService from '../../../services/JobCodeService';
 
-class ErrorCodeListings extends Component {
+class JobCodeListings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {errorCodes: [], isLoading: true};
+    this.state = {jobCodes: [], isLoading: true};
   }
 
   componentDidMount() {
-    ErrorCodeService.getAllBulk()
+    JobCodeService.getAllBulk()
     .then(data => {
-      this.setState({errorCodes: data});
+      this.setState({jobCodes: data});
     })
     this.setState({isLoading: false});
   }
 
   render() {
-    const {errorCodes, isLoading} = this.state;
+    const {jobCodes, isLoading} = this.state;
 
     if (isLoading) {
       return <LoadingScreen/>;
     }
 
-    const reportList = errorCodes.map(errorCode => {
-      return <tr key={errorCode.id}>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.type.name}</td>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.code}</td>
-        <td style={{whiteSpace: 'nowrap'}}>{errorCode.description}</td>
+    const reportList = jobCodes.map(jobCode => {
+      return <tr key={jobCode.id}>
+        <td style={{whiteSpace: 'nowrap'}}>{jobCode.code}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{jobCode.description}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/management/errors/" + errorCode.id  + "/details"}>View/Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/management/jobcodes/" + jobCode.id  + "/details"}>View/Edit</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -46,12 +45,11 @@ class ErrorCodeListings extends Component {
 
         <Container fluid>
           <div className="float-right">
-            <Button color="success" tag={Link} to="/management/errors/new">Create Failure Code</Button>
+            <Button color="success" tag={Link} to="/management/jobcodes/new">Create Job Code</Button>
           </div>
           <Table className="mt-4">
             <thead>
             <tr>
-              <th width="10%">Category</th>
               <th width="10%">Code</th>
               <th width="10%">Description</th>
             </tr>
@@ -67,4 +65,4 @@ class ErrorCodeListings extends Component {
   }
 }
 
-export default ErrorCodeListings;
+export default JobCodeListings;

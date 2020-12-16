@@ -6,6 +6,8 @@ import ItemsList from '../components/ItemsList';
 import Select from 'react-select';
 
 import ProductService from '../services/ProductService';
+import JobCodeService from '../services/JobCodeService';
+import ErrorCodeService from '../services/ErrorCodeService';
 import AuthService from '../AuthService';
 
 class RepairProduct extends Component {
@@ -18,6 +20,7 @@ class RepairProduct extends Component {
     plot: {},
     supplier: {},
     metadata: {
+      jobCode: null,
       notes: [],
       checkList: {
         items: [{
@@ -39,30 +42,37 @@ class RepairProduct extends Component {
     this.state = {
       item: this.emptyItem,
       errorCodes: [],
+      jobCodes: [],
       note:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeErrorCode = this.handleChangeErrorCode.bind(this);
+    this.handleChangeJobCode = this.handleChangeJobCode.bind(this);
     this.handleAddNote = this.handleAddNote.bind(this);
   }
 
 
-  async componentDidMount() {
+  componentDidMount() {
     var item = this.state.item;
     const id = this.props.match.params.id;
 
     if (id) {
-      item = await (await fetch(`/api/products/${this.props.match.params.id}`)).json();
+      ProductService.getById(id)
+      .then(data => {
+        this.setState({item: data});
+      });
     }
 
-    if (!item.metadata.notes) {
-      item.metadata.notes = [];
-    }
+    JobCodeService.getAllBulk()
+      .then(data => {
+        this.setState({jobCodes: data});
+      });
 
-    const errorCodes = await (await fetch('/api/errors/')).json();
-
-    this.setState({item: item, errorCodes: errorCodes.content});
+    ErrorCodeService.getAllBulk()
+      .then(data => {
+        this.setState({errorCodes: data});
+      })
   }
 
   async handleChange(event) {
@@ -91,6 +101,19 @@ class RepairProduct extends Component {
     }
 
     this.setState({item: item, errorCodes: this.state.errorCodes});
+  }
+
+  async handleChangeJobCode(event) {
+    console.log(event);
+    let item = this.state.item;
+    const value = event.value;
+    const codes = this.state.jobCodes.filter(code => code.id === value);
+
+    if (codes.length > 0) {
+      item.metadata.jobCode = codes[0];
+    }
+
+    this.setState({item: item});
   }
 
   async handleReject(item) {
@@ -144,6 +167,7 @@ class RepairProduct extends Component {
 
   render() {
     const {item} = this.state;
+    console.log(this.state.jobCodes);
 
     const notes = item.metadata.notes.map(n => {
       return <div> {n} </div>
@@ -178,10 +202,22 @@ class RepairProduct extends Component {
       "label" : d.code + " - " + d.description
     }));
 
+    const jobs = this.state.jobCodes.map(d => ({
+      "value" : d.id,
+      "label" : d.code + " - " + d.description
+    }));
+
     console.log(item);
+
     var val;
     if (item.metadata.errorCode) {
       val = options.filter(o => o.value === item.metadata.errorCode.id);
+    }
+
+    var jobCode;
+
+    if (item.metadata.jobCode) {
+      jobCode = jobs.filter(j => j.value === item.metadata.jobCode.id);
     }
 
     return <div>
@@ -204,9 +240,8 @@ class RepairProduct extends Component {
         <h4> Technician: {item.metadata.technician || "Demo User"} </h4>
         <h4> Model Number: {item.model.modelNumber} </h4>
         <h4> Serial Number: {item.serialNumber} </h4>
-        <Form onSubmit={this.handleSubmit}>
-        <Select options={options} onChange={(event) => {this.handleChangeErrorCode(event)}} value = {val}/>
-        </Form>
+        <h4> Failure Code:</h4><Select options={options} onChange={(event) => {this.handleChangeErrorCode(event)}} value = {val}/>
+        <h4> Job Code:</h4><Select options={jobs} onChange={(event) => {this.handleChangeJobCode(event)}} value = {jobCode}/>
         <h4> Notes:</h4>
         {notes}
         <Form onSubmit={this.handleAddNote}>
