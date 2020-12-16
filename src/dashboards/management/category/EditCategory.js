@@ -39,6 +39,7 @@ handleSubmit(event) {
   event.preventDefault();
   const {item} = this.state;
   CategoryService.save(item);
+  this.props.history.push('/management/types');
 }
 
 render() {

@@ -78,6 +78,7 @@ handleSubmit(event) {
     },
     body: JSON.stringify(item),
   });
+  this.props.history.push('/pack-out');
 }
 
 render() {
@@ -98,7 +99,7 @@ render() {
   //const val = options.filter(o => o.value === item.supplier.id);
 
   return <div>
-    
+
     <Container>
       <h2>Pack Out Product</h2>
       <tr>

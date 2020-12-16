@@ -103,6 +103,8 @@ class QaProduct extends Component {
       },
       body: JSON.stringify(item),
     });
+
+    this.props.history.push('/qa');
   }
 
   async handleSubmit(event) {
@@ -119,6 +121,8 @@ class QaProduct extends Component {
       },
       body: JSON.stringify(item),
     });
+
+    this.props.history.push('/qa');
   }
 
   render() {
