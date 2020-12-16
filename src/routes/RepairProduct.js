@@ -77,7 +77,7 @@ class RepairProduct extends Component {
 
 
     if (item.model.category) {
-      ErrorCodeService.getByTypeId(item.model.category.id);
+      ErrorCodeService.getByTypeId(item.model.category.id)
         .then(data => {
           this.setState({errorCodes: data});
         });
