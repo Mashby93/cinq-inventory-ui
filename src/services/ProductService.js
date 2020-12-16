@@ -9,7 +9,7 @@ class ProductService {
 
   getById(id) {
     return axios
-      .get(API_URL + "/" + id, {
+      .get(API_URL + id, {
       })
       .then(response => {
         console.log(response);
