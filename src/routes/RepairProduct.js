@@ -57,7 +57,6 @@ class RepairProduct extends Component {
 
 
   componentDidMount() {
-    var item = this.state.item;
     const id = this.props.match.params.id;
 
     if (id) {
@@ -66,7 +65,17 @@ class RepairProduct extends Component {
         if (!data.metadata.partNumbers) {
           data.metadata["partNumbers"] = [];
         }
-        this.setState({item: data});
+        this.setState({item: data}, function() {
+          let item = this.state.item;
+
+          console.log(item);
+          if (item && item.model.category) {
+            ErrorCodeService.getByTypeId(item.model.category.id)
+              .then(data => {
+                this.setState({errorCodes: data});
+              });
+          }
+        });
       });
     }
 
@@ -74,19 +83,6 @@ class RepairProduct extends Component {
       .then(data => {
         this.setState({jobCodes: data});
       });
-
-
-    if (item.model.category) {
-      ErrorCodeService.getByTypeId(item.model.category.id)
-        .then(data => {
-          this.setState({errorCodes: data});
-        });
-    } else {
-      ErrorCodeService.getAllBulk()
-        .then(data => {
-          this.setState({errorCodes: data});
-        });
-    }
 
   }
 
