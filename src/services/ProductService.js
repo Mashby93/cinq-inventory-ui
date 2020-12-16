@@ -55,6 +55,29 @@ class ProductService {
       return response.data
     })
   }
+
+  addPartNumber(id, partNumber) {
+    let user = AuthService.getCurrentUser();
+
+    let config = {
+      headers: { Authorization: `Bearer ${user.jwt}`}
+    }
+
+    return axios({
+      method: 'post',
+      url: API_URL + "partNumbers",
+      headers: {
+        Authorization: `Bearer ${user.jwt}`
+      },
+      params: {
+        id:id,
+        partNumber:partNumber
+      }
+    }).then(response => {
+      console.log(response);
+      return response.data
+    })
+  }
 }
 
 export default new ProductService;

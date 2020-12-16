@@ -20,6 +20,7 @@ class RepairProduct extends Component {
     plot: {},
     supplier: {},
     metadata: {
+      partNumbers:[],
       jobCode: null,
       notes: [],
       checkList: {
@@ -43,13 +44,15 @@ class RepairProduct extends Component {
       item: this.emptyItem,
       errorCodes: [],
       jobCodes: [],
-      note:""
+      note:"",
+      partNumber:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeErrorCode = this.handleChangeErrorCode.bind(this);
     this.handleChangeJobCode = this.handleChangeJobCode.bind(this);
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.handleAddPartNumber = this.handleAddPartNumber.bind(this);
   }
 
 
@@ -60,6 +63,9 @@ class RepairProduct extends Component {
     if (id) {
       ProductService.getById(id)
       .then(data => {
+        if (!data.metadata.partNumbers) {
+          data.metadata["partNumbers"] = [];
+        }
         this.setState({item: data});
       });
     }
@@ -161,17 +167,38 @@ class RepairProduct extends Component {
     this.setState({item: item, errorCodes: this.state.errorCodes, note:""});
   }
 
+  handleAddPartNumber(event) {
+    event.preventDefault();
+    let {item} = this.state;
+    let promise = ProductService.addPartNumber(item.id, this.state.partNumber);
+
+    promise.then(data => {
+      item.metadata.partNumbers = data;
+    });
+
+    this.setState({item: item, partNumber:""});
+  }
+
   handleChangeNote(event) {
     this.setState({note: event.target.value})
   }
 
+  handleChangePartNumber(event) {
+    this.setState({partNumber: event.target.value})
+  }
+
   render() {
     const {item} = this.state;
+    console.log(item);
     console.log(this.state.jobCodes);
 
     const notes = item.metadata.notes.map(n => {
       return <div> {n} </div>
-    })
+    });
+
+    const partNumbers = item.metadata.partNumbers.map(n => {
+      return <div> {n} </div>
+    });
 
     const checkList = item.metadata.checkList === undefined || item.metadata.checkList === null || item.metadata.checkList.items === undefined || item.metadata.checkList.items === null ? "" : item.metadata.checkList.items.map(i => {
       let data = Object.keys(i.items).map((k, t) => {
@@ -242,6 +269,14 @@ class RepairProduct extends Component {
         <h4> Serial Number: {item.serialNumber} </h4>
         <h4> Failure Code:</h4><Select options={options} onChange={(event) => {this.handleChangeErrorCode(event)}} value = {val}/>
         <h4> Job Code:</h4><Select options={jobs} onChange={(event) => {this.handleChangeJobCode(event)}} value = {jobCode}/>
+        <h4> Part Numbers: </h4>
+        {partNumbers}
+        <Form onSubmit={this.handleAddPartNumber}>
+        <FormGroup>
+          <Input type="text" name="note" id="note" onChange={(event) => this.handleChangePartNumber(event)}/>
+          <Button color="primary" type="submit">Add</Button>
+        </FormGroup>
+        </Form>
         <h4> Notes:</h4>
         {notes}
         <Form onSubmit={this.handleAddNote}>
