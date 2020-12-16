@@ -54,7 +54,7 @@ class ErrorCodeService {
   }
 
   getAllBulk() {
-    return axios.get(API_URL + "/bulk")
+    return axios.get(API_URL + "/bulk/ordered")
       .then(response => {
         console.log(response);
         return response.data;
