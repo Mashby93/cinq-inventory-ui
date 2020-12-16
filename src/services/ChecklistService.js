@@ -14,6 +14,18 @@ class ChecklistService {
     };
   }
 
+  getById(id) {
+    return axios({
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: API_URL + "/" + id
+    })
+    .then(response => {
+      return response.data;
+    });
+  }
 
   getAllBulk() {
     return axios.get(API_URL)
@@ -21,6 +33,20 @@ class ChecklistService {
         console.log(response);
         return response.data;
       })
+  }
+
+  edit(checklist) {
+    return axios({
+      method: 'patch',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: API_URL,
+      data: JSON.stringify(checklist)
+    })
+    .then(response => {
+      return response.data;
+    });
   }
 
   save(checklist) {

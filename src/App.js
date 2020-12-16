@@ -73,6 +73,7 @@ class App extends Component {
           <PrivateRoute path='/management/reports' exact={true} component={ReportListings}/>
           <PrivateRoute path='/management/checklists' exact={true} component={CheckListListings}/>
           <PrivateRoute path='/management/checklists/new' exact={true} component={EditCheckList}/>
+          <PrivateRoute path='/management/checklists/:id/details' exact={true} component={EditCheckList}/>
           <PrivateRoute path='/management/types' exact={true} component={ListCategories}/>
           <PrivateRoute path='/management/types/new' exact={true} component={EditCategory}/>
           <PrivateRoute path='/management/types/:id/details' exact={true} component={EditCategory}/>

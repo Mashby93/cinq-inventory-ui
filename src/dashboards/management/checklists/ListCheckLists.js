@@ -33,7 +33,7 @@ class CheckListListings extends Component {
         <td style={{whiteSpace: 'nowrap'}}>{checklist.id}</td>
         <td>
           <ButtonGroup>
-            <Button size="sm" color="primary" tag={Link} to={"/receivables/" + checklist.id + "/receive"}>View/Edit</Button>
+            <Button size="sm" color="primary" tag={Link} to={"/management/checklists/" + checklist.id + "/details"}>View/Edit</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -41,7 +41,7 @@ class CheckListListings extends Component {
 
     return (
       <div>
-        
+
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/management/checklists/new">Create Checklist</Button>
@@ -57,7 +57,7 @@ class CheckListListings extends Component {
             </tbody>
           </Table>
         </Container>
-        
+
       </div>
     );
   }

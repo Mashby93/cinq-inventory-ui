@@ -31,15 +31,15 @@ class EditCheckList extends Component {
 
 
   async componentDidMount() {
-    var item = this.state.item;
     const id = this.props.match.params.id;
 
     if (id) {
-      item = await (await fetch(`/api/routes/reciece/${id}`)).json();
+      ChecklistService.getById(id)
+      .then(data => {
+        this.setState({item: data});
+      })
     }
 
-    const suppliers = await (await fetch('/api/supplier/')).json();
-    this.setState({item: item, suppliers:suppliers.content});
   }
 
   handleChangeName(event) {
@@ -110,8 +110,12 @@ class EditCheckList extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    ChecklistService.save(this.state.item);
-    //this.props.history.push('/groups');
+    if (this.props.match.params.id) {
+      ChecklistService.edit(this.state.item);
+    } else {
+      ChecklistService.save(this.state.item);
+    }
+    this.props.history.push('/management/checklists');
   }
 
   render() {
