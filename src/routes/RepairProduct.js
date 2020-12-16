@@ -75,10 +75,19 @@ class RepairProduct extends Component {
         this.setState({jobCodes: data});
       });
 
-    ErrorCodeService.getAllBulk()
-      .then(data => {
-        this.setState({errorCodes: data});
-      })
+
+    if (item.model.category) {
+      ErrorCodeService.getByTypeId(item.model.category.id);
+        .then(data => {
+          this.setState({errorCodes: data});
+        });
+    } else {
+      ErrorCodeService.getAllBulk()
+        .then(data => {
+          this.setState({errorCodes: data});
+        });
+    }
+
   }
 
   async handleChange(event) {
