@@ -9,6 +9,7 @@ import ProductService from '../services/ProductService';
 import JobCodeService from '../services/JobCodeService';
 import ErrorCodeService from '../services/ErrorCodeService';
 import AuthService from '../AuthService';
+import UserService from '../services/UserService';
 
 class RepairProduct extends Component {
 
@@ -42,6 +43,7 @@ class RepairProduct extends Component {
     super(props);
     this.state = {
       item: this.emptyItem,
+      techName: "Unknown",
       errorCodes: [],
       jobCodes: [],
       note:"",
@@ -74,6 +76,12 @@ class RepairProduct extends Component {
               .then(data => {
                 this.setState({errorCodes: data});
               });
+          }
+
+          if (item && item.metadata.techName) {
+            UserService.getUser(item.metadata.techName)
+            .then(data =>
+              this.setState({techName: data.firstName + " " + data.lastName}));
           }
         });
       });
@@ -269,7 +277,7 @@ class RepairProduct extends Component {
         </Form>
         </td>
           <td style={{textAlign:"right"}}>
-        <h4> Technician: {item.metadata.technician || "Demo User"} </h4>
+        <h4> Technician: {this.state.techName} </h4>
         <h4> Model Number: {item.model.modelNumber} </h4>
         <h4> Serial Number: {item.serialNumber} </h4>
         <h4> Failure Code:</h4><Select options={options} onChange={(event) => {this.handleChangeErrorCode(event)}} value = {val}/>

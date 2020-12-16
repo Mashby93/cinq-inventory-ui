@@ -4,6 +4,7 @@ import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from '../AppNavbar';
 
 import ProductService from '../services/ProductService';
+import UserService from '../services/UserService';
 
 class QaProduct extends Component {
 
@@ -36,6 +37,7 @@ class QaProduct extends Component {
     super(props);
     this.state = {
       item: this.emptyItem,
+      techName:"Unknown",
       note:""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -46,7 +48,15 @@ class QaProduct extends Component {
   async componentDidMount() {
     if (this.props.match.params.id !== 'new') {
       const group = await (await fetch(`/api/products/${this.props.match.params.id}`)).json();
-      this.setState({item: group});
+      this.setState({item: group}, function() {
+        let item = this.state.item;
+
+        if (item && item.metadata.techName) {
+          UserService.getUser(item.metadata.techName)
+          .then(data =>
+            this.setState({techName: data.firstName + " " + data.lastName}));
+        }
+      });
     }
   }
 
@@ -158,7 +168,7 @@ class QaProduct extends Component {
         </Form>
         </td>
           <td style={{textAlign:"right"}}>
-        <h4> Technician: {item.metadata.technician || "Uknown"} </h4>
+        <h4> Technician: {this.state.techName} </h4>
         <h4> Model Number: {item.model.modelNumber} </h4>
         <h4> Serial Number: {item.serialNumber} </h4>
         <h4> Error Code: {item.metadata.errorCode ? item.metadata.errorCode.code + " - " + item.metadata.errorCode.description : ""} </h4>
