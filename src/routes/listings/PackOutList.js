@@ -7,7 +7,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 
 class PackOutList extends Component {
 
-  link = 'api/products/bulk?statusCodes=READY_FOR_PACK_OUT&statusCodes=PACK_OUT';
+  link = 'api/products/bulk?statusCodes=READY_FOR_PACK_OUT';
 
   constructor(props) {
     super(props);
@@ -94,7 +94,7 @@ class PackOutList extends Component {
 
     return (
       <div>
-        
+
         <Container fluid>
         <h6> Filters </h6>
         <input
@@ -126,7 +126,7 @@ class PackOutList extends Component {
             </tbody>
           </Table>
         </Container>
-        
+
       </div>
     );
   }
