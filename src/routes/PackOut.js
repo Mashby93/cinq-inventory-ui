@@ -79,6 +79,7 @@ handleSubmit(event) {
     body: JSON.stringify(item),
   });
   this.props.history.push('/pack-out');
+  window.location.reload();
 }
 
 render() {

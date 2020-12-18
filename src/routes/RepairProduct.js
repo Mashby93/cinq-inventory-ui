@@ -148,6 +148,7 @@ class RepairProduct extends Component {
       body: JSON.stringify(item),
     });
     this.props.history.push('/repair');
+    window.location.reload();
   }
 
   async handleSubmit(event) {
@@ -165,6 +166,7 @@ class RepairProduct extends Component {
     });
 
     this.props.history.push('/repair');
+    window.location.reload();
   }
 
   setTechnician(item) {

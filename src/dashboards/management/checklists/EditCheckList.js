@@ -116,6 +116,7 @@ class EditCheckList extends Component {
       ChecklistService.save(this.state.item);
     }
     this.props.history.push('/management/checklists');
+    window.location.reload();
   }
 
   render() {

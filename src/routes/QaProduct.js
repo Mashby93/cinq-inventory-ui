@@ -105,6 +105,7 @@ class QaProduct extends Component {
     });
 
     this.props.history.push('/qa');
+    window.location.reload();
   }
 
   async handleSubmit(event) {
@@ -123,6 +124,7 @@ class QaProduct extends Component {
     });
 
     this.props.history.push('/qa');
+    window.location.reload();
   }
 
   render() {

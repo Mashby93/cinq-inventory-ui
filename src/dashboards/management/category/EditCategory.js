@@ -40,6 +40,7 @@ handleSubmit(event) {
   const {item} = this.state;
   CategoryService.save(item);
   this.props.history.push('/management/types');
+  window.location.reload();
 }
 
 render() {
