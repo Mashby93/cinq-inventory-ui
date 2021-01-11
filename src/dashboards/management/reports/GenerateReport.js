@@ -12,28 +12,26 @@ class GenerateReport extends Component {
 
 constructor(props) {
   super(props);
-
   this.state = {startDate:new Date(), endDate:new Date()};
-
   this.handleSubmit = this.handleSubmit.bind(this);
   this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
   this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
 }
 
 handleChangeStartDate(date) {
-  date.setHours(3);
   this.setState({startDate: date});
 }
 
 handleChangeEndDate(date) {
-  date.setHours(23);
   this.setState({endDate: date});
 }
 
 handleSubmit(event) {
   event.preventDefault();
-  const {startDate, endDate} = this.state;
+  let {startDate, endDate} = this.state;
 
+  startDate.setHours(0);
+  endDate.setHours(24);
   ReportService.generateReport(startDate.getTime(), endDate.getTime());
   this.props.history.push("/management/reports");
   window.location.reload();
