@@ -4,6 +4,8 @@ import AppNavbar from '../AppNavbar';
 import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 
+import ProductService from '../services/ProductService';
+
 class PackOut extends Component {
 
   emptyItem = {
@@ -68,7 +70,7 @@ async handleChangeSerial(event) {
 handleSubmit(event) {
   event.preventDefault();
   const {item} = this.state;
-  item.metadata.routeStatus = 'PACK_OUT';
+
   console.log(item);
   fetch('/api/products', {
     method: 'POST',
@@ -78,6 +80,9 @@ handleSubmit(event) {
     },
     body: JSON.stringify(item),
   });
+
+  ProductService.updateRouteStatus(item.id, 'PACK_OUT');
+
   this.props.history.push('/pack-out');
   window.location.reload();
 }

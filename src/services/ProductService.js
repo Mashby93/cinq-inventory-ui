@@ -78,6 +78,30 @@ class ProductService {
       return response.data
     })
   }
+
+  updateRouteStatus(id, status) {
+    let user = AuthService.getCurrentUser();
+
+    let config = {
+      headers: { Authorization: `Bearer ${user.jwt}`}
+    }
+
+    return axios({
+      method: 'patch',
+      url: "/api/routes/status",
+      headers: {
+        Authorization: `Bearer ${user.jwt}`
+      },
+      params: {
+        id:id,
+        userId:user.id,
+        status:status
+      }
+    }).then(response => {
+      console.log(response);
+      return response.data
+    })
+  }
 }
 
 export default new ProductService;

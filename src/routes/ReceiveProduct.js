@@ -5,6 +5,8 @@ import { Link, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import axios from "axios";
 
+import AuthService from '../AuthService';
+
 const API_URL = "/api/";
 
 class ReceiveProduct extends Component {
@@ -76,6 +78,8 @@ handleSubmit(event) {
   event.preventDefault();
   const id = this.props.match.params.id;
 
+  let user = AuthService.getCurrentUser();
+
   if (id) {
     axios.patch(API_URL + "routes/receive", null, {
       params: {
@@ -105,7 +109,8 @@ handleSubmit(event) {
       params: {
         modelNumber: this.state.model,
         supplierId: this.state.supplier.id,
-        serial: this.state.serial
+        serial: this.state.serial,
+        userId:user.id
       }
     })
     .then(() => {

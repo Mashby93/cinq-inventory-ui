@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import LoadingScreen from '../../components/LoadingScreen';
 
+import ProductService from '../../services/ProductService';
+
 class ProductList extends Component {
   link = 'api/products/bulk?statusCodes=IN_COSMETIC';
 
@@ -53,10 +55,6 @@ class ProductList extends Component {
   }
 
   async updateStatus(product) {
-    console.log(product);
-
-    product.metadata.routeStatus='READY_FOR_REPAIR';
-        console.log(JSON.stringify(product));
     await fetch(`/api/products`, {
       method: 'POST',
       headers: {
@@ -66,6 +64,7 @@ class ProductList extends Component {
       body: JSON.stringify(product)
     }).then(() => {
       let updatedProducts = [...this.state.products].filter(i => i.id !== product.id);
+      ProductService.updateRouteStatus(product.id, 'READY_FOR_REPAIR');
       this.setState({products: updatedProducts});
     });
   }
@@ -140,7 +139,7 @@ class ProductList extends Component {
 
     return (
       <div>
-        
+
         <Container fluid>
         <h6> Filters </h6>
         <input

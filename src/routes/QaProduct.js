@@ -92,9 +92,6 @@ class QaProduct extends Component {
   }
 
   async handleReject(item) {
-
-    item.metadata.routeStatus = 'IN_REPAIR';
-
     await fetch('/api/products', {
       method: 'POST',
       headers: {
@@ -103,6 +100,8 @@ class QaProduct extends Component {
       },
       body: JSON.stringify(item),
     });
+
+    ProductService.updateRouteStatus(item.id, 'IN_REPAIR');
 
     this.props.history.push('/qa');
     window.location.reload();
@@ -112,8 +111,6 @@ class QaProduct extends Component {
     event.preventDefault();
     const {item} = this.state;
 
-    item.metadata.routeStatus = 'READY_FOR_PACK_OUT';
-
     await fetch('/api/products', {
       method: 'POST',
       headers: {
@@ -122,6 +119,8 @@ class QaProduct extends Component {
       },
       body: JSON.stringify(item),
     });
+
+    ProductService.updateRouteStatus(item.id, 'READY_FOR_PACK_OUT');
 
     this.props.history.push('/qa');
     window.location.reload();

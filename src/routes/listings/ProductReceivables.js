@@ -4,6 +4,8 @@ import AppNavbar from '../../AppNavbar';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../../components/LoadingScreen';
 
+import ProductService from '../../services/ProductService';
+
 class ProductReceivables extends Component {
 
   constructor(props) {
@@ -20,10 +22,6 @@ class ProductReceivables extends Component {
   }
 
   async updateStatus(product) {
-    console.log(product);
-
-    product.metadata.routeStatus='IN_COSMETIC';
-        console.log(JSON.stringify(product));
     await fetch(`/api/products`, {
       method: 'POST',
       headers: {
@@ -33,6 +31,7 @@ class ProductReceivables extends Component {
       body: JSON.stringify(product)
     }).then(() => {
       let updatedProducts = [...this.state.products].filter(i => i.id !== product.id);
+      ProductService.updateRouteStatus(product.id, 'IN_COSMETIC');
       this.setState({products: updatedProducts});
     });
   }
@@ -64,7 +63,7 @@ class ProductReceivables extends Component {
 
     return (
       <div>
-        
+
         <Container fluid>
           <div className="float-right">
             <Button color="success" tag={Link} to="/receivables/receive">Receive Product</Button>

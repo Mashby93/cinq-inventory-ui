@@ -136,7 +136,6 @@ class RepairProduct extends Component {
   }
 
   async handleReject(item) {
-    item.metadata.routeStatus = 'READY_FOR_QA';
     this.setTechnician(item);
 
     await fetch('/api/products', {
@@ -147,6 +146,9 @@ class RepairProduct extends Component {
       },
       body: JSON.stringify(item),
     });
+
+    ProductService.updateRouteStatus(item.id, 'READY_FOR_QA');
+    
     this.props.history.push('/repair');
     window.location.reload();
   }
