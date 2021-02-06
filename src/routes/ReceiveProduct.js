@@ -22,6 +22,11 @@ constructor(props) {
       id: "",
       name: ""
     },
+    brands: [],
+    brand: {
+      id: "",
+      name: ""
+    },
     model: "",
     serial: "",
     models:[],
@@ -33,20 +38,21 @@ constructor(props) {
   this.handleChangeSerial = this.handleChangeSerial.bind(this);
   this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
   this.handleRedirect = this.handleRedirect.bind(this);
+  this.handleChangeBrand = this.handleChangeBrand.bind(this);
 }
 
 async componentDidMount() {
   const id = this.props.match.params.id;
 
   const suppliers = await (await fetch('/api/supplier/')).json();
-  const models = await (await fetch('/api/models/')).json()
+  const brands = await (await fetch('/api/brand/')).json();
+  const models = await (await fetch('/api/models/')).json();
 
   if (id) {
     var item = await (await fetch(`/api/receive/${id}`)).json();
-    console.log(item);
-    this.setState({suppliers:suppliers.content, supplier: item.supplier, model: item.model.modelNumber, serial: item.serial, models:models.content});
+    this.setState({suppliers:suppliers.content, brands:brands.content, supplier: item.supplier, model: item.model.modelNumber, serial: item.serial, models:models.content});
   } else {
-    this.setState({suppliers:suppliers.content, models:models.content});
+    this.setState({suppliers:suppliers.content, models:models.content, brands:brands.content});
   }
 
 }
@@ -74,6 +80,15 @@ async handleChangeSupplier(event) {
   this.setState({supplier: supplier, suppliers: this.state.suppliers, models: this.state.models});
 }
 
+async handleChangeBrand(event) {
+  const value = event.value;
+  const brands = this.state.brands.filter(brand => brand.id === value);
+
+  if (brands.length > 0) {
+    this.setState({brand: brands[0]});
+  }
+}
+
 handleSubmit(event) {
   event.preventDefault();
   const id = this.props.match.params.id;
@@ -84,6 +99,7 @@ handleSubmit(event) {
     axios.patch(API_URL + "routes/receive", null, {
       params: {
         id: this.state.id,
+        brandId: this.state.brand.id,
         modelNumber: this.state.model,
         supplierId: this.state.supplier.id,
         serial: this.state.serial
@@ -108,6 +124,7 @@ handleSubmit(event) {
     axios.post(API_URL + "routes/receive", null, {
       params: {
         modelNumber: this.state.model,
+        brandId:this.state.brand.id,
         supplierId: this.state.supplier.id,
         serial: this.state.serial,
         userId:user.id
@@ -142,15 +159,18 @@ render() {
     return "Loading...";
   }
 
-  //console.log(this.state.suppliers);
-  const data = this.state.suppliers;
-
-  const options = data.map(d => ({
+  const supplierList = this.state.suppliers.map(d => ({
     "value" : d.id,
     "label" : d.name
   }));
 
-  const val = options.filter(o => o.value === this.state.supplier.id);
+  const brandList = this.state.brands.map(d => ({
+    "value" : d.id,
+    "label" : d.name
+  }));
+
+  const val = supplierList.filter(o => o.value === this.state.supplier.id);
+  const brand = brandList.filter(o => o.value === this.state.brand.id);
 
   return <div>
 
@@ -160,7 +180,11 @@ render() {
       <Form onSubmit={this.handleSubmit}>
       <FormGroup>
         <Label for="supplier">Supplier</Label>
-        <Select options={options} onChange={this.handleChangeSupplier} value={val}/>
+        <Select options={supplierList} onChange={this.handleChangeSupplier} value={val}/>
+      </FormGroup>
+      <FormGroup>
+        <Label for="brand">Brand</Label>
+        <Select options={brandList} onChange={this.handleChangeBrand} value={brand}/>
       </FormGroup>
         <FormGroup>
           <Label for="modelNumber">Model Number</Label>
