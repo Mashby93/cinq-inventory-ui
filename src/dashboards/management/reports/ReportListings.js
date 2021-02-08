@@ -14,6 +14,7 @@ class ReportListings extends Component {
     super(props);
     this.state = {reports: [], isLoading: true};
     this.handleDownloadReport = this.handleDownloadReport.bind(this);
+    this.handleDeleteReport = this.handleDeleteReport.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,11 @@ class ReportListings extends Component {
     });
   }
 
+  handleDeleteReport(id) {
+    ReportService.delete(id);
+    window.location.reload();
+  }
+
   render() {
     const {reports, isLoading} = this.state;
 
@@ -47,6 +53,7 @@ class ReportListings extends Component {
         <td>
           <ButtonGroup>
             <Button size="sm" color="primary" onClick={() => this.handleDownloadReport(report.id)}>Download</Button>
+            <Button size="sm" color="danger" onClick={() => this.handleDeleteReport(report.id)}>Delete</Button>
           </ButtonGroup>
         </td>
       </tr>
@@ -64,6 +71,7 @@ class ReportListings extends Component {
             <tr>
               <th width="10%">Name</th>
               <th width="10%">Status</th>
+              <th width="10%">Actions</th>
             </tr>
             </thead>
             <tbody>

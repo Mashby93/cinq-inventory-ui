@@ -7,6 +7,19 @@ const API_URL = "/api/reports";
 
 class ReportService {
 
+  delete(id) {
+    return axios({
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url: API_URL + "/" + id
+    })
+    .then(response => {
+        console.log(response);
+        return response;
+      });
+  }
 
   download(id) {
     return axios
