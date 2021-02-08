@@ -30,7 +30,7 @@ class ModelList extends Component {
 
     const reportList = models.map(model => {
       return <tr key={model.id}>
-        <td style={{whiteSpace: 'nowrap'}}>{model.supplier.name}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{model.brand.name}</td>
         <td style={{whiteSpace: 'nowrap'}}>{model.category ? model.category.name : ""}</td>
         <td style={{whiteSpace: 'nowrap'}}>{model.modelNumber}</td>
         <td style={{whiteSpace: 'nowrap'}}>{model.description}</td>
@@ -52,7 +52,7 @@ class ModelList extends Component {
           <Table className="mt-4">
             <thead>
             <tr>
-              <th width="10%">Supplier</th>
+              <th width="10%">Brand</th>
               <th width="10%">Category</th>
               <th width="20%">Model Number</th>
               <th width="20%">Description</th>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
 import CategoryService from '../services/CategoryService';
-import SupplierService from '../services/SupplierService';
+import BrandService from '../services/BrandService';
 import ChecklistService from '../services/ChecklistService';
 import ModelService from '../services/ModelService';
 
@@ -20,7 +20,7 @@ class ModelEdit extends Component {
       id: null,
       name: ""
     },
-    supplier: {
+    brand: {
       id:"",
       name: ""
     },
@@ -33,8 +33,8 @@ class ModelEdit extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {item: this.model , suppliers: [], types:[], checklists:[], isLoading: true, error:""};
-    this.handleChangeSupplier = this.handleChangeSupplier.bind(this);
+    this.state = {item: this.model , brands: [], types:[], checklists:[], isLoading: true, error:""};
+    this.handleChangeBrand = this.handleChangeBrand.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
     this.handleChangeModel = this.handleChangeModel.bind(this);
     this.handleChangeColor = this.handleChangeColor.bind(this);
@@ -52,8 +52,8 @@ class ModelEdit extends Component {
       this.setState({item: group});
     }
 
-    SupplierService.getAllBulk().then(s => {
-      this.setState({suppliers: s});
+    BrandService.getAllBulk().then(s => {
+      this.setState({brands: s});
     })
     CategoryService.getAllBulk().then(t => {
       this.setState({types: t});
@@ -63,12 +63,12 @@ class ModelEdit extends Component {
     })
   }
 
-  handleChangeSupplier(event) {
+  handleChangeBrand(event) {
     let item = {...this.state.item};
-    let supplier = this.state.suppliers.filter(s => s.id == event.value);
+    let supplier = this.state.brands.filter(s => s.id == event.value);
 
     if (supplier.length > 0) {
-      item["supplier"] = supplier[0];
+      item["brand"] = supplier[0];
       this.setState({item: item});
     }
   }
@@ -140,14 +140,14 @@ class ModelEdit extends Component {
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Model' : 'Create Model'}</h2>;
 
-    const data = this.state.suppliers;
+    const data = this.state.brands;
 
     const options = data.map(d => ({
       "value" : d.id,
       "label" : d.name
     }));
 
-    const val = options.filter(o => item.supplier === undefined || item.supplier === null ? false : o.value === item.supplier.id);
+    const val = options.filter(o => item.brand === undefined || item.brand === null ? false : o.value === item.brand.id);
 
     const types = this.state.types.map(t => ({
       "value" : t.id,
@@ -170,8 +170,8 @@ class ModelEdit extends Component {
           {this.state.error}
           <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label for="supplier">Supplier</Label>
-            <Select options={options} onChange={this.handleChangeSupplier} value={val} required="true"/>
+            <Label for="supplier">Brand</Label>
+            <Select options={options} onChange={this.handleChangeBrand} value={val} required="true"/>
           </FormGroup>
           <FormGroup>
             <Label for="type">Type</Label>
