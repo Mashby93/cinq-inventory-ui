@@ -117,7 +117,8 @@ class ProductList extends Component {
       const val = options.filter(o => o.label === product.metadata.cosmeticCode);
 
       return <tr key={product.id}>
-        <td style={{whiteSpace: 'nowrap'}}>{product.model.supplier.name}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{product.supplier.name}</td>
+        <td style={{whiteSpace: 'nowrap'}}>{product.model.brand.name}</td>
         <td style={{whiteSpace: 'nowrap'}}>{product.model.modelNumber}</td>
         <td style={{whiteSpace: 'nowrap'}}>{product.serialNumber}</td>
         <td style={{whiteSpace: 'nowrap'}}>{modelDescription}</td>
@@ -157,6 +158,7 @@ class ProductList extends Component {
             <thead>
             <tr>
               <th width="10%">Supplier</th>
+              <th width="10%">Brand</th>
               <th width="10%">Model</th>
               <th width="10%">Serial</th>
               <th width="10%">Description</th>
