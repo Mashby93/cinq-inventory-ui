@@ -49,8 +49,8 @@ async componentDidMount() {
   const models = await (await fetch('/api/models/')).json();
 
   if (id) {
-    var item = await (await fetch(`/api/receive/${id}`)).json();
-    this.setState({suppliers:suppliers.content, brands:brands.content, supplier: item.supplier, model: item.model.modelNumber, serial: item.serial, models:models.content});
+    var item = await (await fetch(`/api/routes/receive/${id}`)).json();
+    this.setState({suppliers:suppliers.content, brands:brands.content, supplier: item.supplier, model: item.model.modelNumber, serial: item.serial, brand: item.model.brand, models:models.content});
   } else {
     this.setState({suppliers:suppliers.content, models:models.content, brands:brands.content});
   }
