@@ -35,8 +35,7 @@ class ReportService {
     return axios
       .get(API_URL, {
         params: {
-          pageNumber: pageNumber,
-          pageSize: pageSize
+          sort:"createdAt,asc"
         }
       })
       .then(response => {

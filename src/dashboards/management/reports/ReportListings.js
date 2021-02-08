@@ -48,6 +48,7 @@ class ReportListings extends Component {
 
     const reportList = reports.map(report => {
       return <tr key={report.id}>
+        <td style={{whiteSpace: 'nowrap'}}>{new Date(report.createdAt).toLocaleString('en-GB', { timeZone: 'UTC' })}</td>
         <td style={{whiteSpace: 'nowrap'}}>{report.name}</td>
         <td style={{whiteSpace: 'nowrap'}}>{report.reportStatus}</td>
         <td>
@@ -69,6 +70,7 @@ class ReportListings extends Component {
           <Table className="mt-4">
             <thead>
             <tr>
+              <th width="10%">Generated Time</th>
               <th width="10%">Name</th>
               <th width="10%">Status</th>
               <th width="10%">Actions</th>
