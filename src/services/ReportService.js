@@ -35,7 +35,9 @@ class ReportService {
     return axios
       .get(API_URL, {
         params: {
-          sort:"createdAt,asc"
+          page:0,
+          limit:100000,
+          sort:"createdAt,desc"
         }
       })
       .then(response => {

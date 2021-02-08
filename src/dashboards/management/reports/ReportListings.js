@@ -12,7 +12,7 @@ class ReportListings extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {reports: [], isLoading: true};
+    this.state = {reports: [], isLoading: true, nameFilter:""};
     this.handleDownloadReport = this.handleDownloadReport.bind(this);
     this.handleDeleteReport = this.handleDeleteReport.bind(this);
   }
@@ -37,6 +37,22 @@ class ReportListings extends Component {
   handleDeleteReport(id) {
     ReportService.delete(id);
     window.location.reload();
+  }
+
+  async handleModelSearch() {
+    ReportService.getAll(1, 50)
+      .then(data => data.filter(report => {
+        if (this.state.nameFilter && this.state.nameFilter !== "") {
+          return report.name.includes(this.state.nameFilter);
+        }
+        return true;
+      }))
+      .then(data => this.setState({reports: data, isLoading: false}));
+  }
+
+  async setModelFilter(event) {
+    this.state.nameFilter = event.target.value;
+    this.handleModelSearch();
   }
 
   render() {
@@ -64,9 +80,23 @@ class ReportListings extends Component {
       <div>
 
         <Container fluid>
-          <div className="float-right">
-            <Button color="success" tag={Link} to="/reports/new">Generate Report</Button>
-          </div>
+        <Table>
+        <tr>
+        <td>
+        <h6> Search </h6>
+        <input
+        type="text"
+        placeholder="Name"
+        onChange={(event) => this.setModelFilter(event)}
+        />
+        </td>
+        <td>
+        <div className="float-right">
+          <Button color="success" tag={Link} to="/reports/new">Generate Report</Button>
+        </div>
+        </td>
+        </tr>
+        </Table>
           <Table className="mt-4">
             <thead>
             <tr>
